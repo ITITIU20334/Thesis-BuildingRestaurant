@@ -1,0 +1,350 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ml-3 {
+  margin-left: 3rem;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+.txt-while {
+  color: aliceblue;
+}
+.mr-3 {
+  margin-right: 4rem;
+}
+.red {
+  background: red;
+}
+.blue {
+  background: #000;
+}
+.product-details {
+  text-align: left;
+}
+
+.product-details h1 {
+  margin-top: 0;
+}
+
+.product-details p {
+  margin-bottom: 10px;
+}
+.d-flex {
+  display: flex;
+}
+
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #343a40;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Căn các mục lên trên */
+}
+
+.content {
+  margin-left: 250px;
+  padding: 20px;
+  width: calc(100% - 250px);
+
+  height: 100vh; /* Đảm bảo chiều cao của phần nội dung */
+}
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+form {
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+}
+h2 {
+  margin-bottom: 20px;
+}
+.mb-3 {
+  margin-bottom: 15px;
+}
+.btn {
+  display: block;
+}
+.ban-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.ban-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  text-align: center;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ban-card h5 {
+  margin: 10px 0;
+}
+
+.ban-card img {
+  width: 50px;
+  height: 50px;
+  margin: 10px auto;
+}
+
+.ban-card button {
+  margin-top: 10px;
+  width: 100%;
+}
+.don-dat-ban-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.don-dat-ban-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  text-align: center;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.don-dat-ban-card h5 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.don-dat-ban-card p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.don-dat-ban-card button {
+  width: 100%;
+  margin-top: 10px;
+}
+/* styles.css */
+.sidebar {
+  width: 200px;
+  background-color: #f0f0f0;
+  padding: 10px;
+}
+
+.table-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.table {
+  background-color: yellow;
+  padding: 20px;
+  text-align: center;
+}
+
+.app {
+  display: flex;
+}
+/* Introduction.css */
+.introduction {
+  text-align: center;
+  padding: 50px;
+  background-color: #f8f9fa;
+}
+
+.introduction h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.introduction h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.introduction p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.introduction button {
+  font-size: 1.2rem;
+  padding: 10px 20px;
+}
+/* Introduction.css */
+.introduction {
+  text-align: center;
+  padding: 50px;
+  background-color: #f8f9fa;
+}
+
+.introduction h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.introduction h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.introduction p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.introduction button {
+  font-size: 1.2rem;
+  padding: 10px 20px;
+}
+
+.intro-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+/* Footer.css */
+.footer {
+  background-color: #cba35c;
+  padding: 40px 0;
+}
+
+.footer h5 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.footer p,
+.footer ul,
+.footer li {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.footer ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.footer li {
+  margin-bottom: 5px;
+}
+
+.footer form {
+  margin-top: 20px;
+}
+
+.footer button {
+  margin-top: 10px;
+}
+/* NavigationBar.css */
+.search-form {
+  display: flex;
+  align-items: center;
+
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.search-input {
+  width: 200px;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.search-button {
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.search-input:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.search-button:hover {
+  background-color: #28a745;
+  color: white;
+}
+.ban-card-silde {
+  background-color: #cccfcd;
+  border-radius: 15px;
+  color: #000;
+}
+.bordered-table {
+  border: 1px solid #dee2e6;
+  margin-bottom: 20px;
+}
+
+.bordered-table .rdt_Table {
+  border: 1px solid #dee2e6;
+}
+
+.bordered-table .rdt_TableRow {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.bordered-table .rdt_TableCol {
+  border-right: 1px solid #dee2e6;
+}
+
+.bordered-table .rdt_TableCol:last-child {
+  border-right: none;
+}
