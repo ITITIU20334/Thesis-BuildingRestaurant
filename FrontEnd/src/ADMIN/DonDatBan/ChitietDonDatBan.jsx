@@ -37,11 +37,11 @@ const ChitietDonDatBan = (props) => {
   );
   const handleTaoHD = async () => {
     if (ban === null) {
-      toast.error("Ban chua chon ban");
+      toast.error("You have not choose table!");
       handleClose();
       return;
     } else if (ngayDat > ngayTao) {
-      toast.error("Ngay dat ban khong hop le");
+      toast.error("Your booking date is invalid!");
       handleClose();
       return;
     } else {
@@ -59,16 +59,16 @@ const ChitietDonDatBan = (props) => {
           thanhTien: item.soLuong * item.monAnId.giaTien,
         })),
       };
-      console.log("Tạo hóa đơn:", hoaDonDTO);
+      console.log("Create bill:", hoaDonDTO);
       let res = await taoHoaDon(hoaDonDTO);
       if (res) {
-        toast.success("Tạo hóa đơn thành công");
+        toast.success("Bill created successfully");
         HoanThanh(dataChitiet.id);
         capNhatBan(ban.idBan);
         handleClose();
       } else {
-        toast.error("Tạo hóa đơn thất bại");
-        console.log("Tạo hóa đơn thất bại");
+        toast.error("Bill creation failed");
+        console.log("Bill creation failed");
       }
     }
   };
@@ -82,45 +82,45 @@ const ChitietDonDatBan = (props) => {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Chi Tiet Don</Modal.Title>
+          <Modal.Title>Bill Detail</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>
-            <label className="form-label me-4">Ho Ten: </label>
+            <label className="form-label me-4">Full Name: </label>
             <label>{hoTen}</label>
           </div>
           <div>
-            <label className="form-label  me-4">So dien thoai: </label>
+            <label className="form-label  me-4">Phone Number: </label>
             <label htmlFor="">{soDT}</label>
           </div>
           <div>
-            <label className="form-label me-4">Ngay dat ban: </label>
+            <label className="form-label me-4">Date: </label>
             <label htmlFor="">{ngayDat}</label>
           </div>
           <div>
-            <label className="form-label me-4">Gio dat ban: </label>
+            <label className="form-label me-4">Time: </label>
             <label>{thoiGian}</label>
           </div>
           <div>
-            <label className="form-label me-4">So luong khach: </label>
+            <label className="form-label me-4">Number of Customer: </label>
             <label>{soLuong}</label>
           </div>
           <div>
-            <label className="form-label me-4">Ghi Chu:</label>
+            <label className="form-label me-4">Note:</label>
             <label> {ghiChu}</label>
           </div>
           <div>
             <div className="text-center">
-              <strong>CHI TIET MON AN</strong>
+              <strong>Food Detail</strong>
             </div>
             <div>
               <Table striped bordered hover>
                 <tr>
-                  <th>STT</th>
-                  <th>Ten Mon</th>
-                  <th>So Luong</th>
-                  <th>Gia Tien</th>
-                  <th>Tong Cong</th>
+                  <th>No</th>
+                  <th>Name</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th>Total Amount</th>
                 </tr>
                 <tbody>
                   {monan.map((x, index) => (
@@ -138,7 +138,7 @@ const ChitietDonDatBan = (props) => {
               </Table>
               <div className="mt-3 ">
                 <p>
-                  <strong>Tong so tien: </strong>
+                  <strong>Total Amount: </strong>
                   {tongCong.toLocaleString("vi-VN")} VND
                 </p>
               </div>
@@ -147,7 +147,7 @@ const ChitietDonDatBan = (props) => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={() => handleTaoHD()}>
-            Tao hoa don
+            Create
           </Button>
           <Button variant="secondary" onClick={handleClose}>
             Close

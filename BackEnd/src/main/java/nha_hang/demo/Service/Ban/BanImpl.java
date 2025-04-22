@@ -24,6 +24,11 @@ public class BanImpl implements BanService {
     }
 
     @Override
+    public List<Ban> findBan() {
+        return banRepository.findAllActive();
+    }
+
+    @Override
     public Ban save(Ban ban) {
         return banRepository.save(ban);
     }
@@ -42,7 +47,7 @@ public class BanImpl implements BanService {
     @Override
     public Ban updateBan(Integer idBan, Ban ban) {
         Ban ban1 = banRepository.findById(idBan).orElseThrow(
-                ()->new EntityNotFoundException("Khong ton tai ban voi Id "+ idBan)
+                ()->new EntityNotFoundException("Version with Id does not exist"+ idBan)
         );
         ban1.setTenBan(ban.getTenBan());
         ban1.setViTri(ban.getViTri());
@@ -54,12 +59,12 @@ public class BanImpl implements BanService {
     @Override
     public Ban updateTrangThai(Integer idBan) {
         Ban ban = banRepository.findById(idBan).orElseThrow(
-                ()->new EntityNotFoundException("Khong tim thay ban voi id "+ idBan)
+                ()->new EntityNotFoundException("Version with Id does not exist"+ idBan)
         );
-        if(Objects.equals(ban.getTrangThai(), "trống")){
-            ban.setTrangThai("Đang phục vụ");
+        if(Objects.equals(ban.getTrangThai(), "Empty")){
+            ban.setTrangThai("Serving");
         }else {
-            ban.setTrangThai("trống");
+            ban.setTrangThai("Empty");
         }
         banRepository.save(ban);
         return ban;
@@ -67,8 +72,8 @@ public class BanImpl implements BanService {
 
     @Override
     public List<Ban> getBanTrong(LocalDate ngayDat, LocalTime thoiGian) {
-        System.out.println("ngayDat:"+ngayDat);
-        System.out.println("thoiGian:"+thoiGian);
+        System.out.println("Date:"+ngayDat);
+        System.out.println("Time:"+thoiGian);
         return banRepository.getBanTrong(ngayDat, thoiGian);
     }
     @Override
@@ -80,6 +85,11 @@ public class BanImpl implements BanService {
     public List<Ban> getBanTrongByTime(LocalDate ngayDat, LocalTime thoiGian, Integer soNguoi) {
 
         return banRepository.getBanTrongByTime( ngayDat, thoiGian, soNguoi);
+    }
+
+    @Override
+    public void xoaBan(Integer id) {
+        banRepository.softDeleteById(id);
     }
 
 

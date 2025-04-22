@@ -14,20 +14,20 @@ const ThemQuanLy = (props) => {
   const handleSaveQuanLy = async () => {
     if (hoTen === "" || soDT === "" || username === "" || password === "") {
       console.log(hoTen, soDT, username, password);
-      toast.error("Vui lòng nhập đủ thông tin");
+      toast.error("Please Complete Information");
     } else {
       const taikhoan = { username, password, hoTen, soDT, role };
       const phoneRegex = /^(03|05|07|08|09)+([0-9]{8})$/;
       if (!phoneRegex.test(soDT)) {
-        toast.error("Số điện thoại không đúng định dạng!");
+        toast.error("Phone number is not in correct format!");
       } else {
         try {
           await axios.post(URL_BASE, taikhoan);
-          toast.success("Đăng ký thành công!");
+          toast.success("Registration successful!");
           listQuanLy();
           handleClose();
         } catch (error) {
-          toast.error("Tên người dùng đã tồn tại!");
+          toast.error("Username already exists!");
         }
       }
     }
@@ -41,12 +41,12 @@ const ThemQuanLy = (props) => {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Thêm tài khoản</Modal.Title>
+          <Modal.Title>Add Account</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>
             <div className="mb-3">
-              <label className="form-label">Họ tên :</label>
+              <label className="form-label">Full Name:</label>
               <input
                 value={hoTen}
                 className="form-control"
@@ -55,7 +55,7 @@ const ThemQuanLy = (props) => {
               />
             </div>
             <div className="mb-3">
-              <label className="form-label">Số Điện thoại :</label>
+              <label className="form-label">Phone Number:</label>
               <input
                 value={soDT}
                 className="form-control"
@@ -64,7 +64,7 @@ const ThemQuanLy = (props) => {
               />
             </div>
             <div className="mb-3">
-              <label className="form-label">tên tài khoản :</label>
+              <label className="form-label">Username:</label>
               <input
                 value={username}
                 className="form-control"
@@ -73,7 +73,7 @@ const ThemQuanLy = (props) => {
               />
             </div>
             <div className="mb-3">
-              <label className="form-label">Mật khẩu :</label>
+              <label className="form-label">Password:</label>
               <input
                 value={password}
                 className="form-control"
@@ -88,7 +88,7 @@ const ThemQuanLy = (props) => {
             Close
           </Button>
           <Button variant="primary" onClick={() => handleSaveQuanLy()}>
-            Thêm
+            Add
           </Button>
         </Modal.Footer>
       </Modal>

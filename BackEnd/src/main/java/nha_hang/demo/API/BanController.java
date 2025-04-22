@@ -23,22 +23,22 @@ public class BanController {
 
     @GetMapping
     public ResponseEntity<List<Ban>> getAll(){
-        return ResponseEntity.ok().body(banService.getAll());
+        return ResponseEntity.ok().body(banService.findBan());
     }
     @GetMapping("/bantrong")
     public ResponseEntity<List<Ban>> getBanTrong(@RequestParam String ngayDat,
                                                  @RequestParam String thoiGian ){
         LocalDate ngay = LocalDate.parse(ngayDat);
         LocalTime gio = LocalTime.parse(thoiGian);
-        System.out.println("ngayDat:"+ngay);
-        System.out.println("thoiGian:"+gio);
+        System.out.println("Date:"+ngay);
+        System.out.println("Time:"+gio);
         return ResponseEntity.ok().body(banService.getBanTrong(ngay,  gio));
     }
     @PostMapping
     public ResponseEntity<Ban> createBan(@RequestBody Ban ban){
 
         if (ban.getTrangThai() == null || ban.getTrangThai().isEmpty()) {
-            ban.setTrangThai("trống");
+            ban.setTrangThai("Empty");
         }
 
         System.out.println(ban);
@@ -55,8 +55,8 @@ public class BanController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<String> DeleteBan(@PathVariable("id") Integer idBan){
-        banService.deleteById(idBan);
-        return ResponseEntity.ok("Xoa ban thanh cong");
+        banService.xoaBan(idBan);
+        return ResponseEntity.ok("Deleted!");
     }
 
     @GetMapping("{id}")
@@ -65,7 +65,7 @@ public class BanController {
         if(ban.isPresent()){
             return ResponseEntity.ok(ban.get());
         }else {
-            throw new RuntimeException("Khong tim thay");
+            throw new RuntimeException("Not Found");
         }
     }
     @PutMapping("/trangthaiban/{id}")
@@ -94,7 +94,7 @@ public class BanController {
     ) {
         LocalDate ngay = LocalDate.parse(ngayDat);
         LocalTime gio = LocalTime.parse(thoiGian);
-        System.out.println("DU LIEU :"+banService.getBanTrongByTime( ngay, gio, soNguoi));
+        System.out.println("Data:"+banService.getBanTrongByTime( ngay, gio, soNguoi));
         return ResponseEntity.ok().body(banService.getBanTrongByTime( ngay, gio, soNguoi));
     }
 //@RequestParam String viTri,viTri,

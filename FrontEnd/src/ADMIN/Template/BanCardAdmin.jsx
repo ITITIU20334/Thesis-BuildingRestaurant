@@ -21,24 +21,24 @@ const BanCardAdmin = ({ bans, taoHoaDon, ChitetHDShow }) => {
           >
             <Nav.Item>
               <Nav.Link
-                eventKey="Ngoài sân"
-                active={selectedPosition === "Ngoài sân"}
+                eventKey="Outside"
+                active={selectedPosition === "Outside"}
               >
                 Outside
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link
-                eventKey="Trong nhà"
-                active={selectedPosition === "Trong nhà"}
+                eventKey="Inside"
+                active={selectedPosition === "Inside"}
               >
                 Inside
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link
-                eventKey="Trên lầu"
-                active={selectedPosition === "Trên lầu"}
+                eventKey="Upstairs"
+                active={selectedPosition === "Upstairs"}
               >
                 Upstairs
               </Nav.Link>

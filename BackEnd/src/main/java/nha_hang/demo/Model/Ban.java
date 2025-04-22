@@ -9,7 +9,7 @@ import lombok.*;
 @Setter
 @ToString
 @Entity
-@Table(name = "table")
+@Table(name = "ban")
 public class Ban {
 
     @Id
@@ -28,4 +28,8 @@ public class Ban {
 
     @Column(name = "trang_thai")
     private  String trangThai;
+
+    @Column(name ="deleted" )
+    private Boolean daXoa = false;
+    public Ban(Integer id) { this.idBan = id; }
 }

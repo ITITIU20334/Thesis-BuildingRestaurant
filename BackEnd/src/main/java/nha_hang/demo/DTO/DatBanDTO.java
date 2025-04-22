@@ -25,7 +25,9 @@ public class DatBanDTO {
     private String hoTen;
     private String soDT;
     private String ghiChu;
+    private String email;
+    private String token;
+    private List<ChiTietDonDatBanDTO> chiTietDonDatBans;
 
-    private List<ChiTietDonDatBanDTO> chiTietDonDatBans ;
 
 }

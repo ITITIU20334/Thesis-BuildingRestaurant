@@ -25,9 +25,9 @@ const TaoDonComponent = (props) => {
       sethoTen("");
       setSoDT("");
       setghiChu("");
-      toast.success("Tao don dat ban thanh cong");
+      toast.success("Create table reservation successfully");
     } else {
-      toast.error("Tao don that bai");
+      toast.error("Create table reservation failed");
     }
   };
   return (
@@ -39,12 +39,12 @@ const TaoDonComponent = (props) => {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Tạo Đơn Đặt Bàn: </Modal.Title>
+          <Modal.Title>Create Reservation Table: </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>
             <div className="mb-3">
-              <label className="form-label">Ngày đặt bàn :</label>
+              <label className="form-label">Date: </label>
               <input
                 value={ngayDat}
                 className="form-control"
@@ -55,14 +55,14 @@ const TaoDonComponent = (props) => {
           </div>
           <div>
             <div class="form-group">
-              <label for="thoiGian1">Thời Gian:</label>
+              <label for="thoiGian1">Time: </label>
               <select
                 class="form-control"
                 id="thoiGian1"
                 value={thoiGian}
                 onChange={(e) => setGioDat(e.target.value)}
               >
-                <option>Chọn giờ</option>
+                <option></option>
                 <option value="10:00">10:00</option>
                 <option value="11:00">11:00</option>
                 <option value="12:00">12:00</option>
@@ -78,7 +78,7 @@ const TaoDonComponent = (props) => {
 
           <div>
             <div className="mb-3">
-              <label className="form-label">Họ tên :</label>
+              <label className="form-label">Full Name: </label>
               <input
                 value={hoTen}
                 className="form-control"
@@ -89,7 +89,7 @@ const TaoDonComponent = (props) => {
           </div>
           <div>
             <div className="mb-3">
-              <label className="form-label">Số điện thoại :</label>
+              <label className="form-label">Phone Number: </label>
               <input
                 value={soDT}
                 className="form-control"
@@ -100,7 +100,7 @@ const TaoDonComponent = (props) => {
           </div>
           <div>
             <div className="mb-3">
-              <label className="form-label">Số lượng khách :</label>
+              <label className="form-label">Number of Customers: </label>
               <input
                 value={soLuong}
                 className="form-control"
@@ -113,7 +113,7 @@ const TaoDonComponent = (props) => {
           </div>
           <div>
             <div className="mb-3">
-              <label className="form-label">Ghi chú :</label>
+              <label className="form-label">Note: </label>
               <input
                 value={ghiChu}
                 className="form-control "
@@ -128,7 +128,7 @@ const TaoDonComponent = (props) => {
             Close
           </Button>
           <Button variant="primary" onClick={handleSave}>
-            Thêm
+            Add
           </Button>
         </Modal.Footer>
       </Modal>

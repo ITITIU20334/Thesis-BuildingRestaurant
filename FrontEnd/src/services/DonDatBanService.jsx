@@ -27,7 +27,7 @@ const ChonBanService = (x) => {
   return axios.put(URL_BASE + "/chonban", x);
 };
 const UserDatBan = (dondatbans) => {
-  return axios.post(URL_BASE + "/khachhang/datban", dondatbans);
+  return axios.post(URL_BASE + "/request", dondatbans);
 };
 const UpdateDonDatBan = (id, dondatban) => {
   return axios.put(URL_BASE + "/" + id, dondatban);

@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface HoaDonRepository extends JpaRepository<HoaDon,Integer> {
-    @Query("select m from HoaDon m WHERE m.idBan.idBan = :idBan and m.trangThai = \"Khởi tạo\"")
+    @Query("select m from HoaDon m WHERE m.idBan.idBan = :idBan and m.trangThai = \"Initialization\"")
     List<HoaDon> ChiTietHoaDon(@Param("idBan") Integer idBan);
 
     @Query("select m FROM HoaDon m order by m.ngayTao desc ")

@@ -23,7 +23,7 @@ const ChonBanModal = (props) => {
       setBan(dataBan);
       console.log(dataBan);
     } catch (error) {
-      console.error("Lỗi khi lấy danh sách bàn trống:", error);
+      console.error("Error when getting list of empty tables", error);
     }
   }
 
@@ -35,26 +35,26 @@ const ChonBanModal = (props) => {
     if (res) {
       handleClose();
       listDonDatBan();
-      toast.success("Xếp bàn thành công");
+      toast.success("Successful table arrangement");
     } else {
-      toast.error("Có lỗi xảy ra");
+      toast.error("Error");
     }
   };
 
   return (
     <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
       <Modal.Header closeButton>
-        <Modal.Title>Chọn bàn</Modal.Title>
+        <Modal.Title>Choose Table</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>STT</th>
-              <th>Tên bàn</th>
-              <th>Vị trí</th>
-              <th>Trạng thái</th>
-              <th>Hành động</th>
+              <th>No</th>
+              <th>Name</th>
+              <th>Position</th>
+              <th>Status</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -66,7 +66,7 @@ const ChonBanModal = (props) => {
                 <td className="text-center">{x.trangThai}</td>
                 <td className="text-center">
                   <Button variant="primary" onClick={() => handleChonBan(x)}>
-                    Chọn
+                    Select
                   </Button>
                 </td>
               </tr>

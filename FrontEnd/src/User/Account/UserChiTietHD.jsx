@@ -75,7 +75,7 @@ const UserChiTietHD = (props) => {
                     <th>Name</th>
                     <th>Quantity</th>
                     <th>Price</th>
-                    <th>Tổng Cộng</th>
+                    <th>Total Amount</th>
                   </tr>
                 </thead>
                 <tbody>

@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface BanService {
     List<Ban> getAll();
-
+List<Ban> findBan();
     Ban save(Ban ban);
 
     Optional<Ban> findById(Integer integer);
@@ -23,5 +23,7 @@ public interface BanService {
      List<Ban> getBanByViTri(String viTri);
      List<String> getViTriBan();
     List<Ban> getBanTrongByTime( LocalDate ngayDat, LocalTime thoiGian, Integer soNguoi);
+
+    public void xoaBan(Integer id);
 }
 //String viTri,

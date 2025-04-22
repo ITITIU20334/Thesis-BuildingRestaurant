@@ -37,34 +37,34 @@ const ThemMonAn = (props) => {
 
   const handleThemMon = async () => {
     if (!selectedItem) {
-      setError("Vui lòng chọn một món ăn.");
+      setError("Please select food");
       return;
     }
 
     const id_monAn = selectedItem.id_mon;
     const id_hoaDon = idHoaDon;
 
-    console.log("ID Món ăn:", id_monAn);
-    console.log("ID Hóa đơn:", id_hoaDon);
+    console.log("ID food:", id_monAn);
+    console.log("ID bill:", id_hoaDon);
 
     const data = { id_hoaDon, id_monAn };
 
     try {
       let res = await themMon(data);
       if (res) {
-        toast.success("Thêm món thành công");
+        toast.success("Add food successfully");
         handleCloseForm();
       } else {
-        toast.error("Có lỗi khi thêm món ăn.");
+        toast.error("Error");
       }
     } catch (error) {
-      setError("Không thể thêm món ăn. Vui lòng thử lại.");
+      setError("Unable to add food. Please try again.");
     }
   };
 
   const columns = [
     {
-      name: "Chọn",
+      name: "Select",
       cell: (row) => (
         <input
           type="radio"
@@ -76,22 +76,22 @@ const ThemMonAn = (props) => {
       center: true,
     },
     {
-      name: "STT",
+      name: "No",
       selector: (row, index) => index + 1,
       center: true,
     },
     {
-      name: "Tên Món",
+      name: "Food Name",
       selector: (row) => row.tenMon,
       center: true,
     },
     {
-      name: "Loại Món",
+      name: "Food Category",
       selector: (row) => row.loaiMonAn.tenLoai,
       center: true,
     },
     {
-      name: "Giá Tiền",
+      name: "Price",
       selector: (row) => row.giaTien,
       center: true,
     },
@@ -121,7 +121,7 @@ const ThemMonAn = (props) => {
         <Modal.Header closeButton>
           <Modal.Title>
             <div className="text-center">
-              <strong>Thêm món ăn</strong>
+              <strong>Add food</strong>
             </div>
           </Modal.Title>
         </Modal.Header>
@@ -140,7 +140,7 @@ const ThemMonAn = (props) => {
             subHeaderComponent={
               <input
                 type="text"
-                placeholder="Tìm kiếm món ăn"
+                placeholder="Search for food"
                 className="form-control"
                 onChange={handleSearch}
               />
@@ -149,10 +149,10 @@ const ThemMonAn = (props) => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseForm}>
-            Đóng
+            Close
           </Button>
           <Button variant="primary" onClick={handleThemMon}>
-            Xác nhận
+            Confirm
           </Button>
         </Modal.Footer>
       </Modal>

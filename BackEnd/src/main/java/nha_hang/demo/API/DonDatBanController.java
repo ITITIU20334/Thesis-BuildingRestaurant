@@ -1,21 +1,23 @@
 package nha_hang.demo.API;
 
 import lombok.RequiredArgsConstructor;
-import nha_hang.demo.DTO.ChiTietDonDatBanDTO;
 import nha_hang.demo.DTO.ChonBanDTO;
 import nha_hang.demo.DTO.DatBanDTO;
-import nha_hang.demo.Model.Ban;
 import nha_hang.demo.Model.DonDatBan;
-import nha_hang.demo.Model.KhachHang;
 import nha_hang.demo.Repository.DonDatBanRepository;
-import nha_hang.demo.Service.DonDatBan.DonDatBanImpl;
 import nha_hang.demo.Service.DonDatBan.DonDatBanService;
+import nha_hang.demo.Service.Email.EmailImpl;
+import nha_hang.demo.Service.Email.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 import nha_hang.demo.Enum.DatBanTrangThai;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @CrossOrigin("*")
 @RequiredArgsConstructor
@@ -26,7 +28,12 @@ public class DonDatBanController {
     private DonDatBanService donDatBanService;
     @Autowired
     private DonDatBanRepository donDatBanRepository;
+    @Autowired
+    private EmailService emailService;
+    private final Map<String, DatBanDTO> pendingBookings = new HashMap<>();
 
+    @Autowired
+    private JavaMailSender mailSender;
 
     @GetMapping
     public ResponseEntity<List<DonDatBan>> getALLDons (){
@@ -45,7 +52,7 @@ public class DonDatBanController {
     @PutMapping("{id}")
     public ResponseEntity<DonDatBan> updateThongTin(@PathVariable("id")Integer idDon,
                                                     @RequestBody DonDatBan donDatBan){
-        System.out.println("DU LIEU DA NHAN DUOC "+ idDon+ "Du lieu :" +donDatBan);
+        System.out.println("Data Received "+ idDon+ "Data: " +donDatBan);
         DonDatBan donDatBan1 = donDatBanService.updateDonDatBan(idDon,donDatBan);
         return ResponseEntity.ok().body(donDatBan1);
     }
@@ -99,5 +106,32 @@ public class DonDatBanController {
         Integer dem = donDatBanRepository.getDonDatBanCount();
         return ResponseEntity.ok().body(dem);
     }
+    @PostMapping("/request")
+    public ResponseEntity<String> requestBooking(@RequestBody DatBanDTO booking) {
+        String token = UUID.randomUUID().toString();
+        booking.setToken(token);
 
+        pendingBookings.put(token, booking);
+        System.out.println("pending: "+pendingBookings);
+        emailService.sendConfirmationEmail(booking.getEmail(), token);
+        return ResponseEntity.ok("✅ Reservation confirmation email has been sent.");
+    }
+
+    @GetMapping("/confirm")
+    public ResponseEntity<String> confirmBooking(@RequestParam String token) {
+        System.out.println("pending :"+pendingBookings);
+        DatBanDTO booking = pendingBookings.get(token);
+
+        if (booking == null) {
+            return ResponseEntity.badRequest().body("❌Invalid or expired token.");
+        }
+
+        booking.setTrangThai(DatBanTrangThai.DangXuLy.getTrangthai());
+        donDatBanService.UserDatBan(booking);
+
+        pendingBookings.remove(token); // Xóa tạm sau khi đã xác nhận
+
+        return ResponseEntity.ok("Your reservation has been confirmed!");
+
+    }
 }

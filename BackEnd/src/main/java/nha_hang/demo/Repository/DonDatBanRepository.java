@@ -10,18 +10,18 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface DonDatBanRepository extends JpaRepository<DonDatBan, Integer> {
-    @Query("SELECT m FROM DonDatBan m WHERE m.trangThai != 'Da Huy' and m.trangThai !='Da Hoan Thanh' ")
+    @Query("SELECT m FROM DonDatBan m WHERE m.trangThai != 'Cancelled' and m.trangThai !='Completed' ")
     List<DonDatBan> findDonDatBanAdmin();
 
-    @Query("SELECT m FROM DonDatBan m WHERE m.trangThai = 'Da Huy' or m.trangThai ='Da Hoan Thanh' ")
+    @Query("SELECT m FROM DonDatBan m WHERE m.trangThai = 'Cancelled' or m.trangThai ='Completed' ")
     List<DonDatBan> findLichSuDatBan();
-    @Query("SELECT m FROM DonDatBan m WHERE m.trangThai = 'Dang xu Ly'  ")
+    @Query("SELECT m FROM DonDatBan m WHERE m.trangThai = 'Processing'  ")
     List<DonDatBan> getDonDatBanMoi();
 
     @Query("SELECT m FROM DonDatBan m WHERE m.idKhach.username=:username order by m.id desc ")
     List<DonDatBan> getDonByKhach( @Param("username") String username);
 
-    @Query("select count(*) from DonDatBan m where m.trangThai = 'Dang xu Ly' ")
+    @Query("select count(*) from DonDatBan m where m.trangThai = 'Processing' ")
     int getDonDatBanCount();
 
 

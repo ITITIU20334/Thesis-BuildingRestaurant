@@ -43,7 +43,8 @@ public class DonDatBan {
     @OneToMany(mappedBy = "donDatBanId", cascade = CascadeType.ALL)
     private List<ChiTietDonDatBan> chiTietDonDatBans;
 
-
+    @Column (name = "email")
+    private String email;
 
 
 }

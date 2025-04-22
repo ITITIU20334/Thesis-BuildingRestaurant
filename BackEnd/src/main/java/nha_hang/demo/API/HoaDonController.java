@@ -89,7 +89,7 @@ public class HoaDonController {
     public ResponseEntity<byte[]> inHoaDon(@PathVariable Integer id) {
         System.out.println(id);
         HoaDon hoaDon = hoaDonRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Không tìm thấy hóa đơn với ID: " + id));
+                .orElseThrow(() -> new RuntimeException("Bill with ID not found: " + id));
 
         return hoaDonService.inHoaDon(hoaDon);
     }

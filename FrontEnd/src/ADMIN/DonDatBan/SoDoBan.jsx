@@ -48,7 +48,7 @@ const SoDoBan = (props) => {
       <div className="my-3">
         <span>
           <span>
-            <b>Sơ đồ bàn</b>
+            <b>Table Map</b>
           </span>
         </span>
       </div>

@@ -46,7 +46,7 @@ public class ChiTietHoaDonImpl implements ChiTietHoaDonService {
 
             hoaDonRepository.save(hd1);
 
-            System.out.println("Món ăn đã tồn tại trong hóa đơn, đã cập nhật số lượng.");
+            System.out.println("The dish already exists in the bill, quantity updated");
         } else {
             Optional<HoaDon> hd = hoaDonRepository.findById(chiTietHoaDonDTO.getId_hoaDon());
             Optional<MonAn> monAn = monAnRepository.findById(chiTietHoaDonDTO.getId_monAn());
@@ -55,13 +55,13 @@ public class ChiTietHoaDonImpl implements ChiTietHoaDonService {
             if (hd.isPresent()) {
                 chiTietHoaDon.setIdHD(hd.get());
             } else {
-                System.out.println("Có gì sai sai ở hóa đơn");
+                System.out.println("Error");
             }
 
             if (monAn.isPresent()) {
                 chiTietHoaDon.setIdMonAn(monAn.get());
             } else {
-                System.out.println("Có gì sai sai ở món ăn");
+                System.out.println("Error");
             }
 
             chiTietHoaDon.setSoLuong(1);
@@ -75,7 +75,7 @@ public class ChiTietHoaDonImpl implements ChiTietHoaDonService {
 
             hoaDonRepository.save(hd1);
 
-            System.out.println("Món ăn chưa có trong hóa đơn, đã thêm vào chi tiết hóa đơn.");
+            System.out.println("The dish is not on the bill, added to the bill details");
         }
 
         return null;
@@ -95,9 +95,9 @@ public class ChiTietHoaDonImpl implements ChiTietHoaDonService {
                     .sum());
             hoaDonRepository.save(hoaDon);
 
-            System.out.println("Món ăn đã bị xóa khỏi hóa đơn, tổng tiền của hóa đơn đã được cập nhật.");
+            System.out.println("Food has been removed from the bill, the total bill has been updated.");
         } else {
-            System.out.println("Chi tiết hóa đơn không tồn tại.");
+            System.out.println("Bill details do not exist");
         }
     }
 

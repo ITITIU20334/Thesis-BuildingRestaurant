@@ -69,11 +69,11 @@ public class MonAnImpl implements MonAnService {
     @Override
     public MonAn UpdateMon(Integer id, MonAnDTO monAnDTO) {
         MonAn monAn=monAnRepository.findById(id).orElseThrow(
-                ()-> new EntityNotFoundException("Khong ton tai Mon an nay")
+                ()-> new EntityNotFoundException("This food is not available")
         );
         DanhMuc danhMuc = danhMucRepository.findById(monAnDTO.getLoaiMonAn()
         ).orElseThrow(
-                ()->new EntityNotFoundException("Khong ton tai danh muc nay")
+                ()->new EntityNotFoundException("This category is not available")
         );
         monAn.setTenMon(monAnDTO.getTenMon());
         monAn.setGiaTien(monAnDTO.getGiaTien());
@@ -93,7 +93,7 @@ public class MonAnImpl implements MonAnService {
             try {
                 Files.createDirectories(uploadPath);
             }catch (Exception e){
-                throw new RemoteException("tao thu muc that bai");
+                throw new RemoteException("Create failure folder");
 
             }
         }

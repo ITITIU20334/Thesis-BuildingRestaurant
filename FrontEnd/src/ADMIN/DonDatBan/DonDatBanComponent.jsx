@@ -67,28 +67,28 @@ export const DonDatBanComponent = () => {
       <div className="my-3">
         <span>
           <span>
-            <b>Tao Don :</b>
+            <b>Create Order: </b>
           </span>
           <button
             className="btn ms-5 btn-success"
             onClick={() => setShowModal(true)}
           >
-            Tao
+            Create
           </button>
         </span>
       </div>
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>STT</th>
-            <th>Ngay Dat Ban</th>
-            <th>Thoi Gian</th>
-            <th>Ho Ten</th>
-            <th>So DT</th>
-            <th>Trang Thai</th>
-            <th>Ghi Chu</th>
-            <th>Bàn</th>
-            <th>Hanh Dong</th>
+            <th>No</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Full Name</th>
+            <th>Phone Number</th>
+            <th>Status</th>
+            <th>Note</th>
+            <th>Table</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -98,7 +98,7 @@ export const DonDatBanComponent = () => {
               <td>{x.thoiGian.substring(0, 5)}</td> <td>{x.hoTen}</td>
               <td>{x.soDT}</td> <td>{x.trangThai}</td> <td>{x.ghiChu}</td>
               <td>
-                {x.idBan && x.idBan.tenBan ? x.idBan.tenBan : "Không có bàn"}
+                {x.idBan && x.idBan.tenBan ? x.idBan.tenBan : "No table available"}
               </td>
               <td>
                 <Dropdown>
@@ -106,7 +106,7 @@ export const DonDatBanComponent = () => {
                     variant="success"
                     id="dropdown-basic  d-flex jcon te"
                   >
-                    Hành Động
+                    Action
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
                     {x.trangThai === "Dang xu Ly" ? (
@@ -115,34 +115,34 @@ export const DonDatBanComponent = () => {
                           onClick={() => DuyetDon(x.id)}
                           href="/admin/dondatban"
                         >
-                          Xác Nhận
+                          Confirm
                         </Dropdown.Item>
                         <Dropdown.Item onClick={() => ChiTietDon(x)}>
-                          Chi Tiet
+                          Detail
                         </Dropdown.Item>
                         <Dropdown.Item
                           onClick={() => HuyDon(x.id)}
                           href="/admin/dondatban"
                         >
-                          Hủy Đơn
+                          Cancel
                         </Dropdown.Item>
                       </>
                     ) : (
                       <>
                         <Dropdown.Item onClick={() => ChonBan(x)}>
-                          Chọn bàn
+                          Select Table
                         </Dropdown.Item>
                         <Dropdown.Item onClick={() => handleUpdate(x)}>
-                          Sửa Thông Tin
+                          Edit
                         </Dropdown.Item>
                         <Dropdown.Item onClick={() => ChiTietDon(x)}>
-                          Chi Tiet
+                          Detail
                         </Dropdown.Item>
                         <Dropdown.Item
                           onClick={() => HuyDon(x.id)}
                           href="/admin/dondatban"
                         >
-                          Hủy Đơn
+                          Cancel
                         </Dropdown.Item>
                       </>
                     )}

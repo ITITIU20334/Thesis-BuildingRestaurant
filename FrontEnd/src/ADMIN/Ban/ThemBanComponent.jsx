@@ -60,12 +60,12 @@ const ThemBanComponent = (props) => {
                 id="viTri"
                 value={viTri}
                 onChange={(event) => setViTri(event.target.value)}
-                defaultValue="Ngoài sân"
+                defaultValue="Outside"
               >
                 <option>Choose Position</option>
-                <option value="Ngoài sân">Outside</option>
-                <option value="Trong nhà">Inside</option>
-                <option value="Trên lầu">Upstairs</option>
+                <option value="Outside">Outside</option>
+                <option value="Inside">Inside</option>
+                <option value="Upstairs6">Upstairs</option>
               </select>
             </div>
             <div class="form-group">

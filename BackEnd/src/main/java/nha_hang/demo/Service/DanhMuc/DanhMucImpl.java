@@ -38,7 +38,7 @@ public class DanhMucImpl implements DanhMucService{
     @Override
     public DanhMuc updateDanhMuc(Integer idDanhMuc, DanhMuc danhMuc) {
         DanhMuc danhMuc1 = danhMucRepository.findById(idDanhMuc).orElseThrow(
-                ()->new EntityNotFoundException("Khong ton tai danh muc voi id " + idDanhMuc)
+                ()->new EntityNotFoundException("Category with id does not exist" + idDanhMuc)
         );
         danhMuc1.setTenLoai(danhMuc.getTenLoai());
         danhMucRepository.save(danhMuc1);

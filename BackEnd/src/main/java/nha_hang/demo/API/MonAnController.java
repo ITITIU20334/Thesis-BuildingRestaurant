@@ -35,7 +35,7 @@ public class MonAnController {
         if(monAn.isPresent()){
             return ResponseEntity.ok().body(monAn.get());
         }else {
-            throw new RuntimeException("Khong co mon an nay");
+            throw new RuntimeException("This food is not available.");
         }
     }
     @GetMapping("/rand_mon")
@@ -56,7 +56,7 @@ public class MonAnController {
             }
             return ResponseEntity.ok(monAns);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body("Id loại món ăn không hợp lệ: " + e.getMessage());
+            return ResponseEntity.badRequest().body("Invalid ID food: " + e.getMessage());
         }
     }
 

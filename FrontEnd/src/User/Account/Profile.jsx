@@ -56,8 +56,8 @@ const Profile = () => {
           <Col>
             <Card>
               <Card.Body>
-                <Tabs defaultActiveKey="thong-tin-ca-nhan" id="profile-tabs">
-                  <Tab eventKey="thong-tin-ca-nhan" title="Thông tin cá nhân">
+                <Tabs defaultActiveKey="personal-detail" id="profile-tabs">
+                  <Tab eventKey="personal-detail" title="Personal Detail">
                     {profile ? (
                       <div>
                         <h2>Profile</h2>
@@ -89,11 +89,11 @@ const Profile = () => {
                       <p>Loading...</p>
                     )}
                   </Tab>
-                  <Tab eventKey="don-dat-ban" title="Đơn đặt bàn">
+                  <Tab eventKey="reservation-table" title="Table Reservation">
                     <h2>Table Reservation</h2>
                     <UserDonDatBan />
                   </Tab>
-                  <Tab eventKey="lich-su-mua-hang" title="Lịch sử mua hàng">
+                  <Tab eventKey="transaction-history" title="Transaction History">
                     <h2>Transaction History</h2>
                     <UserHoaDon />
                   </Tab>

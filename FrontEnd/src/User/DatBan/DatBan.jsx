@@ -31,6 +31,7 @@ const DatBan = () => {
   const [cart, setCart] = useState([]);
   const username = sessionStorage.getItem("username");
   const total = sessionStorage.getItem("total");
+  const [email, setemail] = useState("");
   useEffect(() => {
     async function fetchData() {
       try {
@@ -88,10 +89,10 @@ const DatBan = () => {
       tongTien: item.quantity * item.giaTien,
     }));
 
-    if (username === null) {
-      toast.error("Please login to reserve a table");
-      return;
-    }
+    // if (username === null) {
+    //   toast.error("Please login to reserve a table");
+    //   return;
+    // }
     if (hoTen === "" || soDienThoai === "") {
       toast.error("Please enter complete information");
       return;
@@ -106,6 +107,7 @@ const DatBan = () => {
         ghiChu: ghiChu,
         idKhach: username,
         chiTietDonDatBans: simplifiedCart,
+        email: email,
       };
 
       console.log("Form data:", formData);
@@ -172,8 +174,6 @@ const DatBan = () => {
                       />
                     </Form.Group>
                   </Col>
-                </Row>
-                <Row>
                   <Col md={6}>
                     <Form.Group controlId="thoiGianDatBan">
                       <Form.Label>Time</Form.Label>
@@ -183,6 +183,21 @@ const DatBan = () => {
                         value={dataDatBan ? dataDatBan.thoiGian : ""}
                       />
                     </Form.Group>
+                  </Col>
+                  <Col md={6}>
+                    <Form.Group controlId="email">
+                      <Form.Label>Email</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Enter Email"
+                        
+                        onChange={(e) => setemail(e.target.value)}
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={6}>
                   </Col>
                   <Col md={6}>
                     <Form.Group controlId="ghiChu">

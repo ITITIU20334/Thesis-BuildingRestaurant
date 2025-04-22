@@ -36,41 +36,41 @@ const HoaDonComponent = (props) => {
 
   const columns = [
     {
-      name: "STT",
+      name: "No",
       selector: (row, index) => index + 1,
       center: true,
     },
     {
-      name: "Ngày Tạo",
+      name: "Date",
       selector: (row) => new Date(row.ngayTao).toLocaleDateString("vi-VN"),
       center: true,
     },
     {
-      name: "Họ Tên",
+      name: "Full Name",
       selector: (row) => row.hoTen,
       center: true,
     },
     {
-      name: "Bàn Số",
+      name: "Table No.",
       selector: (row) =>
         row.idBan && row.idBan.tenBan ? row.idBan.tenBan : "N/A",
       center: true,
     },
     {
-      name: "Tổng Tiền",
+      name: "Total Amount",
       selector: (row) => row.tongTien,
       center: true,
     },
     {
-      name: "Trạng Thái",
+      name: "Status",
       selector: (row) => row.trangThai,
       center: true,
     },
     {
-      name: "Chi Tiết",
+      name: "Detail",
       cell: (row) => (
         <button className="btn btn-primary" onClick={() => chiTietDon(row)}>
-          Xem hóa đơn
+          Review Bill
         </button>
       ),
     },
@@ -81,7 +81,7 @@ const HoaDonComponent = (props) => {
       <AdminPage />
       <div className="my-3">
         <span>
-          <b>Lịch sử hóa đơn</b>
+          <b>Billing History</b>
         </span>
       </div>
       <DataTable
@@ -95,7 +95,7 @@ const HoaDonComponent = (props) => {
         subHeaderComponent={
           <input
             type="text"
-            placeholder="Tìm kiếm..."
+            placeholder="Search..."
             onChange={(e) => {
               const value = e.target.value.toLowerCase();
               const filtered = hoadons.filter(

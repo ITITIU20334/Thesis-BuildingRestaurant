@@ -64,7 +64,7 @@ public class HoaDonImpl implements HoaDonService {
     @Override
     public HoaDon hoanThanh(Integer idHD, ThanhToanDTO dto) {
         HoaDon hd = hoaDonRepository.findById(idHD).orElseThrow(
-                ()->new EntityNotFoundException("Khong tim thay hoa don voi id "+ idHD)
+                ()->new EntityNotFoundException("Not Found"+ idHD)
         );
         if(Objects.equals(hd.getTrangThai(), TrangThaiHoaDon.KhoiTao.getTrangthai())){
             ThanhToan tt = new ThanhToan();
@@ -98,7 +98,7 @@ public class HoaDonImpl implements HoaDonService {
                         chiTietHoaDon.setIdMonAn(monAn.get());
                     }
                     else {
-                        throw new EntityNotFoundException("Món ăn với ID " + dto.getIdMonAn() + " không tồn tại.");
+                        throw new EntityNotFoundException("Food with ID" + dto.getIdMonAn() + "not found");
                     }
                     chiTietHoaDon.setSoLuong(dto.getSoLuong());
                     chiTietHoaDon.setThanhTien(dto.getThanhTien());
@@ -122,7 +122,7 @@ public class HoaDonImpl implements HoaDonService {
             document.setFont(font);
 
             // Tiêu đề
-            Paragraph title = new Paragraph("HÓA ĐƠN")
+            Paragraph title = new Paragraph("Bill")
                     .setFont(font)
                     .setFontSize(24)
                     .setBold()
@@ -131,11 +131,11 @@ public class HoaDonImpl implements HoaDonService {
             document.add(title);
 
             // Thông tin hóa đơn
-            document.add(new Paragraph("Mã hóa đơn: " + hoaDon.getIdHD()).setFont(font).setMarginBottom(5));
-            document.add(new Paragraph("Khách hàng: " + (hoaDon.getIdKH() != null ? hoaDon.getIdKH().getHoTen() : "Khách lẻ")).setFont(font).setMarginBottom(5));
-            document.add(new Paragraph("Ngày tạo: " + hoaDon.getNgayTao()).setFont(font).setMarginBottom(5));
-            document.add(new Paragraph("Nhân viên: " + hoaDon.getTenNhanVien()).setFont(font).setMarginBottom(5));
-            document.add(new Paragraph("Bàn: " + hoaDon.getIdBan().getTenBan()).setFont(font).setMarginBottom(20));
+            document.add(new Paragraph("Bill code: " + hoaDon.getIdHD()).setFont(font).setMarginBottom(5));
+            document.add(new Paragraph("Customer: " + (hoaDon.getIdKH() != null ? hoaDon.getIdKH().getHoTen() : "Khách lẻ")).setFont(font).setMarginBottom(5));
+            document.add(new Paragraph("Date:" + hoaDon.getNgayTao()).setFont(font).setMarginBottom(5));
+            document.add(new Paragraph("Staff:" + hoaDon.getTenNhanVien()).setFont(font).setMarginBottom(5));
+            document.add(new Paragraph("Table:" + hoaDon.getIdBan().getTenBan()).setFont(font).setMarginBottom(20));
 
             // Bảng sản phẩm
             float[] columnWidths = {1, 4, 2, 2};
@@ -143,10 +143,10 @@ public class HoaDonImpl implements HoaDonService {
             table.setWidth(UnitValue.createPercentValue(100));
 
             // Header
-            table.addHeaderCell(new Cell().add(new Paragraph("STT").setFont(font).setBold().setBackgroundColor(ColorConstants.LIGHT_GRAY)));
-            table.addHeaderCell(new Cell().add(new Paragraph("Tên sản phẩm").setFont(font).setBold().setBackgroundColor(ColorConstants.LIGHT_GRAY)));
-            table.addHeaderCell(new Cell().add(new Paragraph("Số lượng").setFont(font).setBold().setBackgroundColor(ColorConstants.LIGHT_GRAY)));
-            table.addHeaderCell(new Cell().add(new Paragraph("Thành tiền").setFont(font).setBold().setBackgroundColor(ColorConstants.LIGHT_GRAY)));
+            table.addHeaderCell(new Cell().add(new Paragraph("No").setFont(font).setBold().setBackgroundColor(ColorConstants.LIGHT_GRAY)));
+            table.addHeaderCell(new Cell().add(new Paragraph("Food Name").setFont(font).setBold().setBackgroundColor(ColorConstants.LIGHT_GRAY)));
+            table.addHeaderCell(new Cell().add(new Paragraph("Quantity").setFont(font).setBold().setBackgroundColor(ColorConstants.LIGHT_GRAY)));
+            table.addHeaderCell(new Cell().add(new Paragraph("Price").setFont(font).setBold().setBackgroundColor(ColorConstants.LIGHT_GRAY)));
 
             int stt = 1;
             for (ChiTietHoaDon chiTiet : hoaDon.getChiTietHoaDons()) {
@@ -157,7 +157,7 @@ public class HoaDonImpl implements HoaDonService {
             }
 
             // Tổng cộng
-            table.addCell(new Cell(1, 3).add(new Paragraph("Tổng cộng").setFont(font).setBold())
+            table.addCell(new Cell(1, 3).add(new Paragraph("Total Amount").setFont(font).setBold())
                     .setTextAlignment(TextAlignment.RIGHT)
                     .setBackgroundColor(ColorConstants.LIGHT_GRAY)
                     .setPadding(5));

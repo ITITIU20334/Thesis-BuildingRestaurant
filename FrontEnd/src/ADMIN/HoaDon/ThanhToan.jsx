@@ -21,7 +21,7 @@ const ThanhToan = (props) => {
     hoanThanh(data.idhd, phuongThucTT);
     capNhatBan(data.idBan);
     listBan();
-    toast.success("Thanh toán hóa đơn thành công");
+    toast.success("Bill payment successful");
     handleCloseThanhToan();
   };
 
@@ -35,15 +35,15 @@ const ThanhToan = (props) => {
         style={{ height: "10000px" }}
       >
         <Modal.Body>
-          <Container className="text-center">Thanh toán hóa đơn</Container>
+          <Container className="text-center">Bill Payment</Container>
           <Row>
             <div style={{ marginTop: "50px" }}>
-              Tổng tiền: {data.tongCong} VND
+              Total Amount: {data.tongCong} VND
             </div>
           </Row>
           <Row style={{ marginTop: "50px" }}>
             <div className="form-group">
-              <label htmlFor="thoiGian2">Phương thức thanh toán:</label>
+              <label htmlFor="thoiGian2">Payment Method:</label>
               <select
                 className="form-control"
                 id="thoiGian2"
@@ -54,23 +54,23 @@ const ThanhToan = (props) => {
                   setTienThoiLai(null);
                 }}
               >
-                <option value="">Chọn phương thức</option>
-                <option value="tienMat">Tiền mặt</option>
-                <option value="qrCode">Mã QR</option>
+                <option value=""></option>
+                <option value="Cash">Cash</option>
+                <option value="qrCode">QR Code</option>
               </select>
             </div>
           </Row>
           <Row style={{ marginTop: "20px" }}>
-            {phuongThucTT === "tienMat" && (
+            {phuongThucTT === "Cash" && (
               <div>
-                <label htmlFor="soTienKhachDua">Số tiền khách đưa:</label>
+                <label htmlFor="soTienKhachDua">Amount Paid by Customer:</label>
                 <input
                   type="number"
                   id="soTienKhachDua"
                   className="form-control"
                   value={soTienKhachDua}
                   onChange={(e) => setSoTienKhachDua(e.target.value)}
-                  placeholder="Nhập số tiền khách đưa"
+                  placeholder="Enter amount received from customer"
                 />
                 <Button
                   variant="primary"
@@ -78,14 +78,14 @@ const ThanhToan = (props) => {
                   onClick={handleTinhTienThoi}
                   disabled={!soTienKhachDua || soTienKhachDua < data.tongCong}
                 >
-                  Tính tiền thối
+                  Calculate Change
                 </Button>
                 {tienThoiLai !== null && (
                   <div style={{ marginTop: "50px" }}>
                     {tienThoiLai > 0 ? (
-                      <p>Tiền thối lại: {tienThoiLai} VND</p>
+                      <p>Change Due: {tienThoiLai} VND</p>
                     ) : (
-                      <p>Không đủ tiền để thanh toán.</p>
+                      <p>Not enough money to pay</p>
                     )}
                   </div>
                 )}
@@ -98,17 +98,17 @@ const ThanhToan = (props) => {
                   alt="QR Code"
                   style={{ width: "300px", height: "300px" }}
                 />
-                <p>Quét mã QR để thanh toán.</p>
+                <p>Scan QR Code to Pay</p>
               </div>
             )}
           </Row>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={() => handleThanhToan()}>
-            Xác nhận đã thanh toán
+            Confirm
           </Button>
           <Button variant="secondary" onClick={handleCloseForm}>
-            Đóng
+            Close
           </Button>
         </Modal.Footer>
       </Modal>

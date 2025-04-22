@@ -35,14 +35,14 @@ const MonAnComponent = () => {
   };
 
   const DeleteMonAn = (id) => {
-    if (window.confirm("Bạn có muốn xóa món ăn này?")) {
+    if (window.confirm("Do you want to delete this food?")) {
       deleteMonAn(id)
         .then(() => {
           listMonAn();
-          toast.success("Xóa món ăn thành công!");
+          toast.success("Deleted!");
         })
         .catch((error) => {
-          toast.error("Không thể xóa món ăn!");
+          toast.error("Cannot delete food!");
         });
     }
   };
@@ -66,23 +66,23 @@ const MonAnComponent = () => {
   // Columns configuration for DataTable
   const columns = [
     {
-      name: "STT",
+      name: "No",
       selector: (row, index) => index + 1,
       width: "50px",
       center: true,
     },
     {
-      name: "Tên Món Ăn",
+      name: "Name",
       selector: (row) => row.tenMon,
       sortable: true,
     },
     {
-      name: "Loại Món Ăn",
+      name: "Food Category",
       selector: (row) => row.loaiMonAn.tenLoai,
       sortable: true,
     },
     {
-      name: "Hình Ảnh",
+      name: "Image",
       cell: (row) => (
         <img
           src={row.hinhAnh}
@@ -93,26 +93,26 @@ const MonAnComponent = () => {
       center: true,
     },
     {
-      name: "Giá Tiền",
+      name: "Price",
       selector: (row) => row.giaTien,
       sortable: true,
       center: true,
     },
     {
-      name: "Hành Động",
+      name: "Action",
       cell: (row) => (
         <div>
           <button
             onClick={() => DeleteMonAn(row.id_mon)}
             className="btn btn-danger ms-2"
           >
-            Xóa
+            Delete
           </button>
           <button
             onClick={() => UpdateMonAn(row)}
             className="btn btn-success ms-2"
           >
-            Sửa
+            Edit
           </button>
         </div>
       ),
@@ -124,7 +124,7 @@ const MonAnComponent = () => {
     <div className="d-flex justify-content-between align-items-center w-100">
       <input
         type="text"
-        placeholder="Tìm kiếm món ăn..."
+        placeholder="Search by Food..."
         className="form-control"
         style={{ maxWidth: "300px" }}
         value={searchText}
@@ -138,17 +138,17 @@ const MonAnComponent = () => {
       <AdminPage />
       <div className="">
         <span>
-          <b>Thêm món ăn</b>
+          <b>Add Food</b>
           <button
             className="btn ms-5 btn-success"
             onClick={() => setShowModal(true)}
           >
-            Thêm
+            Add
           </button>
         </span>
       </div>
       <DataTable
-        title="Danh Sách Món Ăn"
+        title="Food List"
         columns={columns}
         data={filteredData} // Use filtered data for rendering
         pagination

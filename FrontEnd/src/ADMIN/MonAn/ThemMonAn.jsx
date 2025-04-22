@@ -27,7 +27,7 @@ const ThemMonAnComponent = (props) => {
   }
 
   const handleSaveMonAn = async () => {
-    console.log("hinh nah" + hinhAnh);
+    console.log("Image" + hinhAnh);
     if (!(hinhAnh instanceof File)) {
       setHinhAnh(null);
     }
@@ -48,24 +48,24 @@ const ThemMonAnComponent = (props) => {
                 setTenMon("");
                 setHinhAnh(null);
                 setGiaTien(0);
-                toast.success("Them mon thanh cong");
+                toast.success("Food added successfully");
               } else {
-                toast.error("Them that bai");
+                toast.error("Add failed item");
               }
             } catch (error) {
-              window.alert("Loi them mon");
+              window.alert("Error adding item");
             }
           } else {
-            window.alert("Vui long xem lai so tien");
+            window.alert("Please double-check the amount");
           }
         } else {
-          window.alert("Chon dnah muc");
+          window.alert("Select category");
         }
       } else {
-        window.alert("Chon hinh anh");
+        window.alert("Select Image");
       }
     } catch (e) {
-      window.alert("Chon hinh anh");
+      window.alert("Select Image");
     }
   };
 
@@ -78,12 +78,12 @@ const ThemMonAnComponent = (props) => {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Them mon an</Modal.Title>
+          <Modal.Title>Add Food</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>
             <div className="mb-3">
-              <label className="form-label">Tên món ăn</label>
+              <label className="form-label">Food Name</label>
               <input
                 value={tenMon}
                 className="form-control"
@@ -92,7 +92,7 @@ const ThemMonAnComponent = (props) => {
               />
             </div>
             <div className="mb-3">
-              <label className="form-label">Hình ảnh:</label>
+              <label className="form-label">Image:</label>
               <input
                 className="form-control"
                 onChange={(event) => setHinhAnh(event.target.files[0])}
@@ -101,13 +101,13 @@ const ThemMonAnComponent = (props) => {
               />
 
               <div className="mb-3">
-                <label className="form-label">Loai danh muc: </label>
+                <label className="form-label">Type of Category: </label>
                 <Form.Select
                   className="form-control"
                   aria-label="Default select example"
                   onChange={(event) => settendanhmuc(event.target.value)}
                 >
-                  <option value="">Chon loai danh muc</option>
+                  <option value="">Select Type of Category</option>
                   {danhmucs.map((x, index) => (
                     <option key={index} value={x.id_Loai}>
                       {x.tenLoai}
@@ -116,7 +116,7 @@ const ThemMonAnComponent = (props) => {
                 </Form.Select>
               </div>
               <div className="mb-3">
-                <label className="form-label">Gia tien: </label>
+                <label className="form-label">Price: </label>
                 <input
                   value={giaTien}
                   className="form-control"
@@ -133,7 +133,7 @@ const ThemMonAnComponent = (props) => {
                 />
               </div>
               <div className="mb-3">
-                <label className="form-label">Mô tả</label>
+                <label className="form-label">Description</label>
                 <textarea
                   value={moTa}
                   className="form-control"
@@ -146,11 +146,11 @@ const ThemMonAnComponent = (props) => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Đóng
+            Close
           </Button>
           <ToastContainer />
           <Button variant="primary" onClick={handleSaveMonAn}>
-            Thêm
+            Add
           </Button>
         </Modal.Footer>
       </Modal>

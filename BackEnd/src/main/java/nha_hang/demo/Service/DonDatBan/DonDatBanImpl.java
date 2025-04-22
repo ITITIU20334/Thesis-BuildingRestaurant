@@ -83,7 +83,7 @@ public class DonDatBanImpl implements DonDatBanService {
                     if (monAn.isPresent()) {
                         chiTiet.setMonAnId(monAn.get());
                     } else {
-                        throw new EntityNotFoundException("Món ăn với ID " + dto.getIdMon() + " không tồn tại.");
+                        throw new EntityNotFoundException("Food with ID" + dto.getIdMon() + " no exists");
                     }
 
                     chiTiet.setSoLuong(dto.getSoLuong());
@@ -103,7 +103,7 @@ public class DonDatBanImpl implements DonDatBanService {
     @Override
     public DonDatBan HoanThanh(Integer id) {
         DonDatBan don = donDatBanRepository.findById(id).orElseThrow(
-                ()->new EntityNotFoundException("Khong tim thay don voi id "+ id)
+                ()->new EntityNotFoundException("Not Found"+ id)
         );
         if(Objects.equals(don.getTrangThai(), DatBanTrangThai.DaDuyet.getTrangthai())){
             don.setTrangThai(DatBanTrangThai.DaHoanThanh.getTrangthai());
@@ -115,7 +115,7 @@ public class DonDatBanImpl implements DonDatBanService {
     @Override
     public DonDatBan DuyetDon(Integer id) {
         DonDatBan don = donDatBanRepository.findById(id).orElseThrow(
-                ()->new EntityNotFoundException("Khong tim thay don voi id "+ id)
+                ()->new EntityNotFoundException("Not Found"+ id)
         );
         if(Objects.equals(don.getTrangThai(), DatBanTrangThai.DangXuLy.getTrangthai())){
             don.setTrangThai(DatBanTrangThai.DaDuyet.getTrangthai());
@@ -127,7 +127,7 @@ public class DonDatBanImpl implements DonDatBanService {
     @Override
     public DonDatBan HuyDon(Integer id) {
         DonDatBan don = donDatBanRepository.findById(id).orElseThrow(
-                ()->new EntityNotFoundException("Khong tim thay don voi id "+ id)
+                ()->new EntityNotFoundException("Not Found"+ id)
         );
         if(Objects.equals(don.getTrangThai(), DatBanTrangThai.DangXuLy.getTrangthai())||
                 Objects.equals(don.getTrangThai(), DatBanTrangThai.DaDuyet.getTrangthai())){
@@ -140,7 +140,7 @@ public class DonDatBanImpl implements DonDatBanService {
     @Override
     public DonDatBan chonBan(ChonBanDTO chonBanDTO) {
         DonDatBan don = donDatBanRepository.findById(chonBanDTO.getIdDonDatBan()).orElseThrow(
-                ()->new EntityNotFoundException("Khong ton tai don dat ban id "+ chonBanDTO.getIdDonDatBan())
+                ()->new EntityNotFoundException("Not Found"+ chonBanDTO.getIdDonDatBan())
         );
         don.setIdBan(chonBanDTO.getChonBan());
         donDatBanRepository.save(don);
@@ -155,16 +155,16 @@ public class DonDatBanImpl implements DonDatBanService {
     @Override
     public DonDatBan updateDonDatBan(Integer id, DonDatBan donDatBan) {
         DonDatBan donDatBan1 = donDatBanRepository.findById(id).orElseThrow(
-                ()->new EntityNotFoundException("Khong ton tai don dat ban ban voi Id "+ id)
+                ()->new EntityNotFoundException("Not Found"+ id)
         );
         if (donDatBan.getNgayDat() != null && !donDatBan.getNgayDat().equals(donDatBan1.getNgayDat())) {
-            System.out.println("Đã thay đổi ngày");
+            System.out.println("Date changed");
             donDatBan1.setIdBan(null);
         }
         System.out.println(donDatBan.getThoiGian());
         System.out.println(donDatBan1.getThoiGian());
         if (donDatBan.getThoiGian()!=donDatBan1.getThoiGian()) {
-            System.out.println("Đã thay đổi giờ");
+            System.out.println("Time changed");
             donDatBan1.setIdBan(null);
         }
         donDatBan1.setNgayDat(donDatBan.getNgayDat());

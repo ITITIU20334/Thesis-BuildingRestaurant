@@ -45,6 +45,7 @@ const ChiTietHoaDon = (props) => {
       .then((response) => {
         setChiTiet(response.data);
         console.log(response);
+        console.log(chitiet);
       })
       .catch((error) => {
         console.log(error);
@@ -57,7 +58,7 @@ const ChiTietHoaDon = (props) => {
   };
 
   function DeleteMonAn(id) {
-    if (window.confirm("Bạn có muốn xóa món ăn này")) {
+    if (window.confirm("Do you want to delete this food?")) {
       deleteMon(id)
         .then((rp) => {
           listChiTiet(idBan);
@@ -71,9 +72,9 @@ const ChiTietHoaDon = (props) => {
   const handleInHoaDon = async (id) => {
     let res = await InHoaDon(id);
     if (res) {
-      toast.success("in thành công");
+      toast.success("Print successfully");
     } else {
-      toast.error("Có lỗi xảy ra");
+      toast.error("Error");
     }
   };
   // const handleThanhToan = (idhd, idBan) => {
@@ -100,7 +101,7 @@ const ChiTietHoaDon = (props) => {
       const imgData = canvas.toDataURL("image/png");
       const pdf = new jsPDF();
       pdf.addImage(imgData, "PNG", 0, 0);
-      pdf.save("hoa-don.pdf");
+      pdf.save("bill.pdf");
     });
   };
 
@@ -115,7 +116,7 @@ const ChiTietHoaDon = (props) => {
         <Modal.Header closeButton>
           <Modal.Title>
             <div className="text-center">
-              <strong>CHI TIẾT HÓA ĐƠN</strong>
+              <strong>Bill Detail</strong>
             </div>
           </Modal.Title>
         </Modal.Header>
@@ -124,33 +125,33 @@ const ChiTietHoaDon = (props) => {
             {chitiet.map((item, index) => (
               <React.Fragment key={item.idHD}>
                 <div className="d-flex">
-                  <p>Ngày Tạo hóa đơn :</p>
+                  <p>Date: </p>
                   <p className="ms-1">
                     {new Date(item.ngayTao).toLocaleDateString("vi-VN")}
                   </p>
                 </div>
                 <div className="d-flex">
-                  <p>Bàn số :</p>
+                  <p>Table No. </p>
                   <p className="ms-3">{item.idBan.tenBan}</p>
                 </div>
                 <div className="d-flex">
-                  <p>Khách hàng :</p>
+                  <p>Customer: </p>
                   <p className="ms-3">{item.hoTen}</p>
                 </div>
                 <div className="d-flex">
-                  <p>Người tạo hóa đơn :</p>
+                  <p>Created by: </p>
                   <p className="ms-3">{item.tenNhanVien}</p>
                 </div>
-                <Button onClick={() => ChonMonAn(item.idHD)}>Thêm món</Button>
+                <Button onClick={() => ChonMonAn(item.idHD)}>Add food</Button>
                 <Table striped bordered hover style={{ marginTop: "20px" }}>
                   <thead>
                     <tr>
-                      <th>STT</th>
-                      <th>Tên Món</th>
-                      <th>Số Lượng</th>
-                      <th>Giá Tiền</th>
-                      <th>Tổng Cộng</th>
-                      <th>Thao tác</th>
+                      <th>No</th>
+                      <th>Name</th>
+                      <th>Quantity</th>
+                      <th>Price</th>
+                      <th>Total Amount</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -169,13 +170,13 @@ const ChiTietHoaDon = (props) => {
                               DeleteMonAn(x.id);
                             }}
                           >
-                            Xóa
+                            Delete
                           </Button>
                         </td>
                       </tr>
                     ))}
                     <tr>
-                      <td colSpan={"2"}>Tổng cộng :</td>
+                      <td colSpan={"2"}>Total Amount:</td>
                       <td colSpan={"4"}>{tongCong}</td>
                     </tr>
                   </tbody>
@@ -186,14 +187,14 @@ const ChiTietHoaDon = (props) => {
                     handleThanhToan(item.idHD, tongCong);
                   }}
                 >
-                  Thanh toán
+                  Check out
                 </Button>
                 <Button
                   style={{ marginLeft: "30px" }}
                   variant="primary"
                   onClick={() => handleInHoaDon(item.idHD)}
                 >
-                  In hóa đơn
+                  Print Bill
                 </Button>
               </React.Fragment>
             ))}
@@ -201,7 +202,7 @@ const ChiTietHoaDon = (props) => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Đóng
+            Close
           </Button>
         </Modal.Footer>
       </Modal>

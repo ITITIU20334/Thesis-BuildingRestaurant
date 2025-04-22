@@ -2,9 +2,12 @@ package nha_hang.demo.Repository;
 
 import nha_hang.demo.Model.Ban;
 import nha_hang.demo.Model.DonDatBan;
+import nha_hang.demo.Model.MonAn;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -44,7 +47,12 @@ public interface BanRepository extends JpaRepository<Ban, Integer> {
     );
 
 
+    @Transactional
+    @Modifying
+    @Query("UPDATE Ban m SET m.daXoa = true WHERE m.idBan = :id")
+    void softDeleteById(@Param("id") Integer id);
 
-
+    @Query("SELECT m FROM Ban m WHERE  m.daXoa = false")
+    List<Ban> findAllActive();
 
 }

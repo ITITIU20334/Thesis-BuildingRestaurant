@@ -38,7 +38,7 @@ public class ProfileController {
             System.out.println(dto);
             userService.changePassword(dto);
 
-            return ResponseEntity.ok().body("Doi mat khau thanh cong");
+            return ResponseEntity.ok().body("Change password successfully");
         }catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -58,9 +58,9 @@ public class ProfileController {
     public ResponseEntity<?> xoaRoleUser(@PathVariable Integer id) {
         try {
             userService.xoaRoleUser(id);
-            return ResponseEntity.ok("Role của khách hàng đã được xóa thành công.");
+            return ResponseEntity.ok("The customer role has been successfully deleted.");
         } catch (Exception e) {
-            return ResponseEntity.status(500).body("Đã xảy ra lỗi: " + e.getMessage());
+            return ResponseEntity.status(500).body("An error occurred: " + e.getMessage());
         }
     }
 

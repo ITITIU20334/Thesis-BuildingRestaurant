@@ -25,36 +25,36 @@ const LichSuDonDatBan = () => {
   // Cột cho bảng DataTable
   const columns = [
     {
-      name: "STT",
+      name: "No",
       cell: (row, index) => index + 1,
       width: "60px",
     },
     {
-      name: "Ngày Đặt Bàn",
+      name: "Date",
       selector: (row) => row.ngayDat,
       sortable: true,
     },
     {
-      name: "Thời Gian",
+      name: "Time",
       selector: (row) =>
         typeof row.thoiGian === "string" ? row.thoiGian.substring(0, 5) : "",
       sortable: true,
     },
     {
-      name: "Họ Tên",
+      name: "Full Name",
       selector: (row) => row.hoTen,
       sortable: true,
     },
     {
-      name: "Số Điện Thoại",
+      name: "Phone Number",
       selector: (row) => row.soDT,
     },
     {
-      name: "Trạng Thái",
+      name: "Status",
       selector: (row) => row.trangThai,
     },
     {
-      name: "Ghi Chú",
+      name: "Note",
       selector: (row) => row.ghiChu,
     },
   ];
@@ -65,7 +65,7 @@ const LichSuDonDatBan = () => {
       <div className="my-3"></div>
 
       <DataTable
-        title="Lịch Sử Đơn Đặt Bàn"
+        title="History Table Booking"
         columns={columns}
         data={filteredData}
         pagination
@@ -76,7 +76,7 @@ const LichSuDonDatBan = () => {
         subHeaderComponent={
           <input
             type="text"
-            placeholder="Tìm kiếm..."
+            placeholder="Search..."
             onChange={(e) => {
               const value = e.target.value.toLowerCase();
               const filtered = dondatbans.filter(

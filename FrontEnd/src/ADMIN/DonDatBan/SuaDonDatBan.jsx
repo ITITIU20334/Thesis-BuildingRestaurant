@@ -38,10 +38,10 @@ const SuaDonDatBan = () => {
     const dataUpdate = { hoTen, soDT, ngayDat, thoiGian, ghiChu };
     let res = await UpdateDonDatBan(data.id, dataUpdate);
     if (res) {
-      toast.success("Cập nhật đơn đặt bàn thành công");
+      toast.success("Updated table reservation successfully");
       navigate("/admin/dondatban");
     } else {
-      toast.error("Cập nhật đơn đặt bàn thất bại");
+      toast.error("Update failed table reservation");
     }
   };
 
@@ -51,36 +51,36 @@ const SuaDonDatBan = () => {
       <Container className="mt-4">
         <Card>
           <Card.Header>
-            <h2>Chỉnh sửa đơn đặt bàn</h2>
+            <h2>Edit Reservation Table</h2>
           </Card.Header>
           <Card.Body>
             {data ? (
               <Form onSubmit={handleSubmit}>
                 <Row className="mb-3">
                   <Form.Group as={Col} controlId="formHoTen">
-                    <Form.Label>Họ tên</Form.Label>
+                    <Form.Label>Full Name</Form.Label>
                     <Form.Control
                       type="text"
                       value={hoTen}
                       onChange={(event) => setHoTen(event.target.value)}
-                      placeholder="Nhập họ tên"
+                      placeholder=""
                     />
                   </Form.Group>
 
                   <Form.Group as={Col} controlId="formSoDT">
-                    <Form.Label>Số điện thoại</Form.Label>
+                    <Form.Label>Phone Number</Form.Label>
                     <Form.Control
                       type="text"
                       value={soDT}
                       onChange={(event) => setSoDT(event.target.value)}
-                      placeholder="Nhập số điện thoại"
+                      placeholder=""
                     />
                   </Form.Group>
                 </Row>
 
                 <Row className="mb-3">
                   <Form.Group as={Col} controlId="formNgayDat">
-                    <Form.Label>Ngày đặt</Form.Label>
+                    <Form.Label>Date</Form.Label>
                     <Form.Control
                       type="date"
                       value={ngayDat}
@@ -89,7 +89,7 @@ const SuaDonDatBan = () => {
                   </Form.Group>
 
                   <Form.Group as={Col} controlId="formThoiGian">
-                    <Form.Label>Thời gian</Form.Label>
+                    <Form.Label>Time</Form.Label>
                     <Form.Select
                       value={thoiGian}
                       onChange={(event) => setThoiGian(event.target.value)}
@@ -108,21 +108,21 @@ const SuaDonDatBan = () => {
                 </Row>
 
                 <Form.Group className="mb-3" controlId="formGhiChu">
-                  <Form.Label>Ghi chú</Form.Label>
+                  <Form.Label>Note</Form.Label>
                   <Form.Control
                     as="textarea"
                     rows={3}
                     value={ghiChu}
                     onChange={(event) => setGhiChu(event.target.value)}
-                    placeholder="Nhập ghi chú"
+                    placeholder=""
                   />
                 </Form.Group>
                 <Button variant="primary" type="submit">
-                  Cập nhật
+                  Update
                 </Button>
               </Form>
             ) : (
-              <p>Không có dữ liệu để sửa</p>
+              <p>No data to edit</p>
             )}
           </Card.Body>
         </Card>

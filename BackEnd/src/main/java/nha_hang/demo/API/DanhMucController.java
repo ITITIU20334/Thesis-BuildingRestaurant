@@ -42,13 +42,13 @@ public class DanhMucController {
     public ResponseEntity<String> deleteDanhMuc(@PathVariable Integer id) {
         try {
             danhMucService.deleteById(id);
-            return ResponseEntity.ok("Xóa danh mục với id = " + id);
+            return ResponseEntity.ok("Delete category ID " + id);
         }
         catch (DataIntegrityViolationException e) {
-            return new ResponseEntity<>("Không thể xóa do ràng buộc khóa ngoại", HttpStatus.CONFLICT);
+            return new ResponseEntity<>("Cannot delete due to foreign key constraint", HttpStatus.CONFLICT);
         }
         catch (Exception e) {
-            return new ResponseEntity<>("Không thể xóa danh mục", HttpStatus.INTERNAL_SERVER_ERROR); }
+            return new ResponseEntity<>("Unable to delete category", HttpStatus.INTERNAL_SERVER_ERROR); }
     }
 
     @GetMapping("{id}")
@@ -57,7 +57,7 @@ public class DanhMucController {
         if(danhMuc.isPresent()){
             return ResponseEntity.ok(danhMuc.get());
         }else {
-            throw new RuntimeException("khong tim thay danh muc");
+            throw new RuntimeException("Category not found");
         }
     }
 }

@@ -22,7 +22,7 @@ const UpdateMonAnComponent = (props) => {
         if (Array.isArray(response.data)) {
           setDanhMuc(response.data);
         } else {
-          console.log("Dữ liệu không phải là một mảng");
+          console.log("Error");
         }
       })
       .catch((error) => {
@@ -40,7 +40,7 @@ const UpdateMonAnComponent = (props) => {
     }
   }, [dataUpdate, show]);
   const handleUpdate = async () => {
-    console.log("Hinh");
+    console.log("Image");
 
     if (loaiMonAn !== "") {
       if (giaTien > 0 && giaTien < 100000000) {
@@ -61,14 +61,14 @@ const UpdateMonAnComponent = (props) => {
             setGiaTien("");
             setLoaiMonAn("");
             setHinhAnh(null);
-            console.log("Thanh cong");
+            console.log("Success");
           }
         } catch (error) {
-          toast.error("Loi");
+          toast.error("Fail");
         }
       }
     } else {
-      window.alert("Vui long chon danh muc");
+      window.alert("Please select category");
     }
   };
 
@@ -81,12 +81,12 @@ const UpdateMonAnComponent = (props) => {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Update Danh Mục</Modal.Title>
+          <Modal.Title>Update Category</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>
             <div className="mb-3">
-              <label className="form-label">Tên món ăn</label>
+              <label className="form-label">Food Name</label>
               <input
                 value={tenMon}
                 className="form-control"
@@ -96,7 +96,7 @@ const UpdateMonAnComponent = (props) => {
             </div>
 
             <div className="mb-3">
-              <label className="form-label ">Hình ảnh:</label>
+              <label className="form-label ">Image: </label>
               <div className="">
                 <img
                   src={hinhAnh}
@@ -112,14 +112,14 @@ const UpdateMonAnComponent = (props) => {
               />
             </div>
             <div className="mb-3">
-              <label className="form-label">Loai danh muc:</label>
+              <label className="form-label">Type of Category: </label>
               <Form.Select
                 className="form-control"
                 aria-label="Default select example"
                 value={loaiMonAn}
                 onChange={(event) => setLoaiMonAn(event.target.value)}
               >
-                <option value="">Chọn loại danh mục</option>
+                <option value="">Select Type of Category</option>
                 {danhmucs.map((x, index) => (
                   <option key={index} value={x.id_Loai}>
                     {x.tenLoai}
@@ -128,7 +128,7 @@ const UpdateMonAnComponent = (props) => {
               </Form.Select>
             </div>
 
-            <label className="form-label ">Giá tiền:</label>
+            <label className="form-label ">Price: </label>
             <input
               value={giaTien}
               className="form-control"

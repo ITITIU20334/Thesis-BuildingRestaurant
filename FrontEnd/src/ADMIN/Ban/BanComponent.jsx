@@ -110,12 +110,12 @@ const BanComponent = (props) => {
                   <Dropdown.Menu>
                     <Dropdown.Item href="/admin/ban">
                       <Button onClick={() => capNhatBan(x.idBan)}>
-                        Edit status
+                        Update status
                       </Button>
                     </Dropdown.Item>
 
                     <Dropdown.Item>
-                      <Button onClick={() => UpdateBan(x)}> Sửa</Button>
+                      <Button onClick={() => UpdateBan(x)}> Edit</Button>
                     </Dropdown.Item>
                     <Dropdown.Item
                       href="/admin/ban"

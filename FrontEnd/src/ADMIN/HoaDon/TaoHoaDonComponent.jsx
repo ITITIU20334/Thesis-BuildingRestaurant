@@ -8,7 +8,7 @@ const TaoHoaDonComponent = (props) => {
   const { handleClose, show, Ban, listBan } = props;
   const [ngayTao, setngayTao] = useState(new Date().toISOString().slice(0, 10));
   const [tenBan, setTenBan] = useState("");
-  const [hoTen, setHoten] = useState("Khách lẻ");
+  const [hoTen, setHoten] = useState("Unnamed Guest");
   const username = sessionStorage.getItem("username");
   const idBan = Ban;
   useEffect(() => {
@@ -26,9 +26,9 @@ const TaoHoaDonComponent = (props) => {
     if (res) {
       handleClose();
 
-      toast.success("Lập hóa đơn thành công");
+      toast.success("Bill created successfully");
     } else {
-      toast.error("Lập thất bại");
+      toast.error("Bill created fail");
     }
   };
   return (
@@ -40,12 +40,12 @@ const TaoHoaDonComponent = (props) => {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Lập hóa đơn</Modal.Title>
+          <Modal.Title>Create Bill</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>
             <div className="mb-3">
-              <label className="form-label">Ngày Tạo :</label>
+              <label className="form-label">Date: </label>
               <input
                 value={ngayTao}
                 className="form-control"
@@ -55,7 +55,7 @@ const TaoHoaDonComponent = (props) => {
               />
             </div>
             <div className="mb-3">
-              <label className="form-label">Bàn số :</label>
+              <label className="form-label">Table No. </label>
               <input
                 value={tenBan}
                 className="form-control"
@@ -65,7 +65,7 @@ const TaoHoaDonComponent = (props) => {
               />
             </div>
             <div className="mb-3">
-              <label className="form-label">Họ tên :</label>
+              <label className="form-label">Full Name: </label>
               <input
                 value={hoTen}
                 className="form-control"
@@ -81,7 +81,7 @@ const TaoHoaDonComponent = (props) => {
             Close
           </Button>
           <Button variant="primary" onClick={() => handleLapHoaDon()}>
-            Lập hóa đơn
+            Create
           </Button>
         </Modal.Footer>
       </Modal>

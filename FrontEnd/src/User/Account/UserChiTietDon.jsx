@@ -78,7 +78,7 @@ const UserChiTiet = (props) => {
                   <th>Name</th>
                   <th>Quantity</th>
                   <th>Price</th>
-                  <th>Tong Cong</th>
+                  <th>Total Amount</th>
                 </tr>
                 <tbody>
                   {monan.map((x, index) => (
