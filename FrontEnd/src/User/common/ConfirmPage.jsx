@@ -8,7 +8,7 @@ function ConfirmPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/dondatban/confirm?token=${token}')
+    fetch('http://localhost:8080/api/dondatban/confirm?token='+ token)
       .then(res => res.text())
       .then(msg => {
         setMessage(`✅ ${msg}`);

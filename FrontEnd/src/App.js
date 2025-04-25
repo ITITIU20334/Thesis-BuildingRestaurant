@@ -32,6 +32,7 @@ import Profile from "./User/Account/Profile";
 import QuanLyComponent from "./ADMIN/NguoiDung/QuanLy/QuanLyComponent";
 import KhachHangComponent from "./ADMIN/NguoiDung/KhachHang/KhachHangComponent";
 import InBaoCaoNgay from "./ADMIN/BaoCao/InBaoCaoNgay";
+import ConfirmPage from "./User/common/ConfirmPage";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
           <Route path="/dat-ban/:idBan" element={<DatBan />} />
           <Route path="/sua-don-dat-ban" element={<SuaDonDatBan />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/confirm" element={<ConfirmPage />} />
           <Route
             path="/admin"
             element={

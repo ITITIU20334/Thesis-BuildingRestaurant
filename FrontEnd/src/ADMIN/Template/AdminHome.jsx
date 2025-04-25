@@ -47,6 +47,7 @@ const AdminHome = () => {
     listDonDatBan();
     listDoanhThu();
     listMonDaBan();
+    ListTongdondatban();
   }, []);
   const listMonDaBan = () => {
     monDaBan()
@@ -68,6 +69,7 @@ const AdminHome = () => {
       });
   };
   const listDonDatBan = () => {
+    console.log("fetch don")
     fetchAllDonDatBan()
       .then((response) => {
         setDonDatBan(response.data);
@@ -121,7 +123,7 @@ const AdminHome = () => {
         setLoading(false);
       });
   }, []);
-  useEffect(() => {
+ const ListTongdondatban = () => {
     fetch("http://localhost:8080/api/dondatban/tongdondatban")
       .then((response) => {
         if (!response.ok) {
@@ -135,7 +137,7 @@ const AdminHome = () => {
       .catch((err) => {
         setError(err.message);
       });
-  }, []);
+  };
 
   const columns = [
     {
@@ -182,13 +184,23 @@ const AdminHome = () => {
         <>
           <button
             className="btn btn-success btn-sm me-2"
-            onClick={() => DuyetDon(row.id)}
+            onClick={() =>
+              DuyetDon(row.id).then(() => {
+                listDonDatBan();         
+                ListTongdondatban();     
+              })
+            }
           >
             Accept
           </button>
           <button
             className="btn btn-danger btn-sm"
-            onClick={() => HuyDon(row.id)}
+            onClick={() =>
+              HuyDon(row.id).then(() => {
+                listDonDatBan();         
+                ListTongdondatban();     
+              })
+            }
           >
             Cancel
           </button>
@@ -324,7 +336,7 @@ const AdminHome = () => {
         <div className="border rounded p-3 shadow-sm">
           <DataTable
             columns={columns}
-            data={dondatbans}
+            data={dondatbans.filter((item) => item.trangThai !== "Approved")}
             pagination
             highlightOnHover
             responsive
