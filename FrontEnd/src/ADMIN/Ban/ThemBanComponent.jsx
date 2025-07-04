@@ -65,7 +65,7 @@ const ThemBanComponent = (props) => {
                 <option>Choose Position</option>
                 <option value="Outside">Outside</option>
                 <option value="Inside">Inside</option>
-                <option value="Upstairs6">Upstairs</option>
+                <option value="Upstairs">Upstairs</option>
               </select>
             </div>
             <div class="form-group">

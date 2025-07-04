@@ -113,7 +113,7 @@ public class DonDatBanController {
 
         pendingBookings.put(token, booking);
         System.out.println("pending: "+pendingBookings);
-        emailService.sendConfirmationEmail(booking.getEmail(), token);
+        emailService.sendConfirmationEmail(booking.getEmail(), token, booking);
         return ResponseEntity.ok("✅ Reservation confirmation email has been sent.");
     }
 
