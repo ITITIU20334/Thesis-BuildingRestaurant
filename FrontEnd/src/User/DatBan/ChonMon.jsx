@@ -72,6 +72,7 @@ const CartDisplay = ({ cart, setCart }) => {
   };
   useEffect(() => {
     sessionStorage.setItem("total", calculateTotal(cart));
+    console.log("Total amount in CartDisplay:", calculateTotal(cart));
   }, [cart]);
 
   const calculateTotal = (cart) => {

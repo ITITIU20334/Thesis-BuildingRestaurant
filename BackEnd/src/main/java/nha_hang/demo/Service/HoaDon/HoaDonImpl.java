@@ -88,22 +88,23 @@ public class HoaDonImpl implements HoaDonService {
         hd.setIdKH(hoaDonDTO.getKhachHang());
         hd.setHoTen(hoaDonDTO.getHoTen());
         hd.setTenNhanVien(hoaDonDTO.getUsername());
+        hd.setDaThanhToan(hoaDonDTO.getPaied());
         hd.setTrangThai(TrangThaiHoaDon.KhoiTao.getTrangthai());
         HoaDon saveHoaDon = hoaDonRepository.save(hd);
         List<ChiTietHoaDon> chiTietHoaDons = hoaDonDTO.getChiTietHoaDons().stream()
                 .map(dto->{
-                    ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon();
-                    Optional<MonAn> monAn = monAnRepository.findById(dto.getIdMonAn().getId_mon());
-                    if(monAn.isPresent()){
-                        chiTietHoaDon.setIdMonAn(monAn.get());
-                    }
-                    else {
-                        throw new EntityNotFoundException("Food with ID" + dto.getIdMonAn() + "not found");
-                    }
-                    chiTietHoaDon.setSoLuong(dto.getSoLuong());
-                    chiTietHoaDon.setThanhTien(dto.getThanhTien());
-                    chiTietHoaDon.setIdHD(hd);
-                    return chiTietHoaDonRepository.save(chiTietHoaDon);
+                            ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon();
+                            Optional<MonAn> monAn = monAnRepository.findById(dto.getIdMonAn().getId_mon());
+                            if(monAn.isPresent()){
+                                chiTietHoaDon.setIdMonAn(monAn.get());
+                            }
+                            else {
+                                throw new EntityNotFoundException("Food with ID" + dto.getIdMonAn() + "not found");
+                            }
+                            chiTietHoaDon.setSoLuong(dto.getSoLuong());
+                            chiTietHoaDon.setThanhTien(dto.getThanhTien());
+                            chiTietHoaDon.setIdHD(hd);
+                            return chiTietHoaDonRepository.save(chiTietHoaDon);
                         }
                 ).collect(Collectors.toList());
         saveHoaDon.setChiTietHoaDons(chiTietHoaDons);

@@ -16,6 +16,7 @@ const ChitietDonDatBan = (props) => {
   const [ghiChu, setghiChu] = useState("");
   const [ban, setBan] = useState([]);
   const [khachHang, setKhachHang] = useState([]);
+  const [paied, setPaied] = useState(0);
   const [monan, setMonAn] = useState([]);
   const ngayTao = new Date().toISOString().slice(0, 10);
   useEffect(() => {
@@ -29,6 +30,10 @@ const ChitietDonDatBan = (props) => {
       setghiChu(dataChitiet.ghiChu);
       setBan(dataChitiet.idBan);
       setMonAn(dataChitiet.chiTietDonDatBans);
+      if (dataChitiet.paidStatus === "PAID") {
+        setPaied(dataChitiet.tongTien);
+      }
+      console.log("Data:", dataChitiet);
     }
   }, [dataChitiet, show]);
   const tongCong = monan.reduce(
@@ -40,10 +45,6 @@ const ChitietDonDatBan = (props) => {
       toast.error("You have not choose table!");
       handleClose();
       return;
-    } else if (ngayDat > ngayTao) {
-      toast.error("Your booking date is invalid!");
-      handleClose();
-      return;
     } else {
       const hoaDonDTO = {
         ngayTao: ngayTao,
@@ -53,6 +54,8 @@ const ChitietDonDatBan = (props) => {
         tongTien: tongCong,
         username: username,
         hoTen: hoTen,
+        paied: paied,
+
         chiTietHoaDons: monan.map((item) => ({
           idMonAn: item.monAnId.id_mon,
           soLuong: item.soLuong,

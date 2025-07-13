@@ -33,6 +33,10 @@ const UpdateDonDatBan = (id, dondatban) => {
   return axios.put(URL_BASE + "/" + id, dondatban);
 };
 
+const getDonByToken = (token) => {
+  return axios.get(URL_BASE + "/getDonByToken?token=" + token);
+};
+
 export {
   fetchAllDonDatBan,
   ChonBanService,
@@ -44,4 +48,5 @@ export {
   fetchLichSuDon,
   HoanThanh,
   fetchDonDatBanByKhach,
+  getDonByToken,
 };

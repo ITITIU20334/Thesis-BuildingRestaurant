@@ -18,8 +18,9 @@ public interface BanRepository extends JpaRepository<Ban, Integer> {
     @Query("select m from Ban m left join DonDatBan n on m.idBan = n.idBan.idBan \n" +
             " AND n.ngayDat = :ngayDat \n" +
             " AND n.thoiGian = :thoiGian \n" +
-            " AND n.trangThai not in ('Da Huy','Da Hoan Thanh')\n"+
-            " WHERE n.idBan.idBan is null \n")
+            " AND n.trangThai not in ('Cancelled','Completed')\n"+
+
+            " WHERE n.idBan.idBan is null and n.idBan.daXoa = false \n")
     List<Ban> getBanTrong(@Param("ngayDat") LocalDate ngayDat,
                           @Param("thoiGian") LocalTime thoiGian);
 
@@ -33,11 +34,11 @@ public interface BanRepository extends JpaRepository<Ban, Integer> {
 
 
     @Query("select m from Ban m left join DonDatBan n on m.idBan = n.idBan.idBan \n" +
-                " AND n.ngayDat = :ngayDat \n" +
-                " AND n.thoiGian = :thoiGian \n" +
-                " AND n.trangThai not in ('Da Huy','Da Hoan Thanh')\n"+
+            " AND n.ngayDat = :ngayDat \n" +
+            "AND ABS(HOUR(n.thoiGian) - HOUR(:thoiGian)) < 2 \n" +
+            " AND n.trangThai not in ('Cancelled','Completed')\n"+
             " WHERE n.idBan.idBan is null \n"+
-                "  and m.soNguoi >= :soNguoi\n"+
+            "  and m.soNguoi >= :soNguoi\n and m.daXoa = false"+
             " ORDER BY m.viTri"
     )
     List<Ban> getBanTrongByTime(

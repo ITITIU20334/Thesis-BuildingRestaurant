@@ -17,5 +17,6 @@ public class HoaDonDTO {
     private String username;
     private String hoTen;
     private Integer idDatBan;
+    private Integer paied = 0;
     private List<ChiTietHoaDon> chiTietHoaDons ;
 }

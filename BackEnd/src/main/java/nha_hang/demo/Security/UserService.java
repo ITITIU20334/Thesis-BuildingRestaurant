@@ -36,10 +36,10 @@ public class UserService {
     }
     public KhachHang getKhachHangByUsername(String username) {
         if (username == null || username.trim().isEmpty()) {
-            throw new IllegalArgumentException("Username không được để trống");
+            throw new IllegalArgumentException("Username can not blank");
         }
         return khachHangRepository.findByUsername(username)
-                .orElseThrow(() -> new EntityNotFoundException("Không tìm thấy Khách Hàng với username: " + username));
+                .orElseThrow(() -> new EntityNotFoundException("Not Found with username: " + username));
     }
     public KhachHang updateKhachHang(String username,KhachHang khachHang){
         KhachHang oldKhachHang = getKhachHangByUsername(username);
@@ -57,11 +57,11 @@ public class UserService {
                 khachHang.get().setPassword(passwordEncoder.encode(dto.getNewPassword()));
             }
             else {
-                throw new RuntimeException("Sai mat khau");
+                throw new RuntimeException("Wrong password!");
             }
             khachHangRepository.save(khachHang.get());
         }else {
-            throw new RuntimeException("Khong ton tai nguoi dung nay");
+            throw new RuntimeException("This user does not exist!");
         }
         return khachHang.get();
     }
@@ -69,9 +69,9 @@ public class UserService {
     public void xoaRoleUser(Integer id) {
         int affectedRows = khachHangRepository.xoaUser(id);
         if (affectedRows > 0) {
-            System.out.println("Xóa role thành công");
+            System.out.println("Delete role successful");
         } else {
-            System.out.println("Không tìm thấy người dùng");
+            System.out.println("Not Found User");
         }
     }
 

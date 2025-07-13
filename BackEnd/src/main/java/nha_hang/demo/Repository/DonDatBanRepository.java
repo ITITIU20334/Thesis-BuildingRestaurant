@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface DonDatBanRepository extends JpaRepository<DonDatBan, Integer> {
     @Query("SELECT m FROM DonDatBan m WHERE m.trangThai != 'Cancelled' and m.trangThai !='Completed' ")
@@ -23,6 +24,7 @@ public interface DonDatBanRepository extends JpaRepository<DonDatBan, Integer> {
 
     @Query("select count(*) from DonDatBan m where m.trangThai = 'Processing' ")
     int getDonDatBanCount();
-
+    @Query("select m From DonDatBan  m where  m.tnfRef = :token ")
+    Optional<DonDatBan> getDonDatBanByTnfRef(@Param("token") String token);
 
 }

@@ -33,6 +33,8 @@ import QuanLyComponent from "./ADMIN/NguoiDung/QuanLy/QuanLyComponent";
 import KhachHangComponent from "./ADMIN/NguoiDung/KhachHang/KhachHangComponent";
 import InBaoCaoNgay from "./ADMIN/BaoCao/InBaoCaoNgay";
 import ConfirmPage from "./User/common/ConfirmPage";
+import TestThanhToan from "./User/ThanhToan/TestThanhToan";
+import ThanhToanTC from "./User/common/ThanhToanTC";
 
 function App() {
   return (
@@ -52,6 +54,8 @@ function App() {
           <Route path="/sua-don-dat-ban" element={<SuaDonDatBan />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/confirm" element={<ConfirmPage />} />
+          <Route path="/payment" element={<TestThanhToan />} />
+          <Route path="/payment/success" element={<ThanhToanTC />} />
           <Route
             path="/admin"
             element={

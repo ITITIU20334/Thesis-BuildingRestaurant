@@ -12,7 +12,7 @@ const ThanhToan = (props) => {
 
   // Hàm tính tiền thối lại
   const handleTinhTienThoi = () => {
-    const tienThoi = parseFloat(soTienKhachDua) - parseFloat(data.tongCong);
+    const tienThoi = parseFloat(soTienKhachDua) - parseFloat(data.SoTien);
     setTienThoiLai(tienThoi > 0 ? tienThoi : 0);
   };
 
@@ -38,7 +38,7 @@ const ThanhToan = (props) => {
           <Container className="text-center">Bill Payment</Container>
           <Row>
             <div style={{ marginTop: "50px" }}>
-              Total Amount: {data.tongCong} VND
+              Total Amount: {data.SoTien} VND
             </div>
           </Row>
           <Row style={{ marginTop: "50px" }}>
@@ -76,14 +76,14 @@ const ThanhToan = (props) => {
                   variant="primary"
                   style={{ marginTop: "10px" }}
                   onClick={handleTinhTienThoi}
-                  disabled={!soTienKhachDua || soTienKhachDua < data.tongCong}
+                  disabled={!soTienKhachDua || soTienKhachDua < data.SoTien}
                 >
                   Calculate Change
                 </Button>
                 {tienThoiLai !== null && (
                   <div style={{ marginTop: "50px" }}>
-                    {tienThoiLai > 0 ? (
-                      <p>Change Due: {tienThoiLai} VND</p>
+                    {tienThoiLai >= 0 ? (
+                      <p>Excess Cash: {tienThoiLai} VND</p>
                     ) : (
                       <p>Not enough money to pay</p>
                     )}
@@ -94,7 +94,7 @@ const ThanhToan = (props) => {
             {phuongThucTT === "qrCode" && (
               <div className="text-center">
                 <img
-                  src={`https://img.vietqr.io/image/ICB-108876742179-compact.png?amount=${data.tongCong}`}
+                  src={`https://img.vietqr.io/image/STB-070119321301-compact.png?amount=${data.SoTien}`}
                   alt="QR Code"
                   style={{ width: "300px", height: "300px" }}
                 />

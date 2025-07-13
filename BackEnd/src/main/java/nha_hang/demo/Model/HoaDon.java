@@ -50,6 +50,9 @@ public class HoaDon {
     @Column(name = "ho_ten")
     private String hoTen;
 
+    @Column(name = "da_thanh_toan")
+    private Integer daThanhToan;
+
     @OneToMany(mappedBy = "idHD", cascade = CascadeType.ALL)
     private List<ChiTietHoaDon> chiTietHoaDons;
 }

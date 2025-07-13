@@ -3,6 +3,7 @@ package nha_hang.demo.Model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.Instant;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -19,7 +20,7 @@ public class ThanhToan {
     private Integer id;
 
     @Column(name = "ngay_thanh_toan")
-    private Date ngayThanhToan;
+    private Date ngayThanhToan = Date.from(Instant.now());
 
     @Column(name = "so_tien")
     private  int soTien;

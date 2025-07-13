@@ -64,6 +64,12 @@ const DatBan = () => {
         console.log(error);
       });
   }
+  const calculateTotal = () => {
+    return cart.reduce(
+      (total, item) => total + item.giaTien * item.quantity,
+      0
+    );
+  };
 
   const handleChonMonAn = (monAn) => {
     setCart((prevCart) => {
@@ -75,6 +81,7 @@ const DatBan = () => {
             : item
         );
       }
+      console.log(total);
       monAn.quantity = 1;
       return [...prevCart, monAn];
     });
@@ -108,14 +115,21 @@ const DatBan = () => {
         idKhach: username,
         chiTietDonDatBans: simplifiedCart,
         email: email,
+        tongTien: sessionStorage.getItem("total"),
       };
 
       console.log("Form data:", formData);
       let res = await UserDatBan(formData);
       if (res) {
+<<<<<<< Updated upstream
         toast.success("Booking successful");
         window.alert("Booking successful");
         navigate("/");
+=======
+        toast.success("Booking successful! Check your Email");
+        window.alert("Booking successful! Please check your email!");
+        //navigate("/");
+>>>>>>> Stashed changes
       } else {
         window.alert("Booking failed");
       }
@@ -190,15 +204,13 @@ const DatBan = () => {
                       <Form.Control
                         type="text"
                         placeholder="Enter Email"
-                        
                         onChange={(e) => setemail(e.target.value)}
                       />
                     </Form.Group>
                   </Col>
                 </Row>
                 <Row>
-                  <Col md={6}>
-                  </Col>
+                  <Col md={6}></Col>
                   <Col md={6}>
                     <Form.Group controlId="ghiChu">
                       <Form.Label>Note</Form.Label>

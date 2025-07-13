@@ -1,20 +1,27 @@
 package nha_hang.demo.Service.DonDatBan;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import nha_hang.demo.DTO.ChiTietDonDatBanDTO;
 import nha_hang.demo.DTO.ChonBanDTO;
 import nha_hang.demo.DTO.DatBanDTO;
+import nha_hang.demo.DTO.OrderDTO;
 import nha_hang.demo.Enum.DatBanTrangThai;
+import nha_hang.demo.Enum.PaymentMethod;
+import nha_hang.demo.Enum.PaymentStatus;
 import nha_hang.demo.Model.*;
 import nha_hang.demo.Repository.*;
+import nha_hang.demo.Service.Payment.PaymentService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.math.BigDecimal;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,6 +32,9 @@ public class DonDatBanImpl implements DonDatBanService {
     private BanRepository banRepository;
     private ChiTietDonDatBanRepository chiTietDonDatBanRepository;
     private final MonAnRepository monAnRepository;
+    private OrderRepository orderRepository;
+    private PaymentService paymentService;
+
 
     @Override
     public List<DonDatBan> getAll() {
@@ -56,7 +66,13 @@ public class DonDatBanImpl implements DonDatBanService {
         datBan.setGhiChu(datBanDTO.getGhiChu());
         datBan.setSoLuong(datBanDTO.getSoLuong());
         datBan.setIdBan(datBanDTO.getIdBan());
-        datBan.setTrangThai(DatBanTrangThai.DangXuLy.getTrangthai());
+        datBan.setTrangThai(DatBanTrangThai.DaDuyet.getTrangthai());
+        datBan.setTongTien(datBanDTO.getTongTien());
+        if(datBan.getTongTien().compareTo(BigDecimal.ZERO) > 0){
+            datBan.setPaidStatus(PaymentStatus.PENDING.toString());
+        }
+        datBan.setEmail(datBanDTO.getEmail());
+        datBan.setTnfRef(datBanDTO.getToken());
 
         // Lấy thông tin khách hàng
         Optional<KhachHang> khachDangKy = khachHangRepository.findByUsername(datBanDTO.getIdKhach());
@@ -95,6 +111,8 @@ public class DonDatBanImpl implements DonDatBanService {
 
         // Thiết lập danh sách chi tiết cho đơn đặt bàn
         saveDon.setChiTietDonDatBans(chiTietDonDatBans);
+
+
 
         // Lưu đơn đặt bàn lần cuối với các chi tiết đã liên kết
         return donDatBanRepository.save(saveDon);
@@ -181,6 +199,40 @@ public class DonDatBanImpl implements DonDatBanService {
     @Override
     public List<DonDatBan> getDonByKhach(String username) {
         return donDatBanRepository.getDonByKhach(username);
+    }
+
+    @Override
+    @Transactional
+    public ResponseEntity<?> DatBan(DatBanDTO datBanDTO, HttpServletRequest request) {
+        if(datBanDTO.getPaymentMethod().equals(PaymentMethod.ONLINE)){
+            //UUID orderKey = UUID.randomUUID();
+            System.out.println("tnfet :" + datBanDTO.getTnfRef());
+            UUID orderKey = UUID.fromString(datBanDTO.getTnfRef());
+            BigDecimal amount = datBanDTO.getTongTien();
+            String username;
+            Optional<KhachHang> khachDangKy = khachHangRepository.findByUsername(datBanDTO.getIdKhach());
+            if (khachDangKy.isPresent()) {
+              username = khachDangKy.get().getHoTen();
+            } else {
+                username = datBanDTO.getHoTen();
+            }
+            String paymentUrl = paymentService.createPaymentUrl(amount, username, orderKey, request);
+            return ResponseEntity.ok().body(paymentUrl);
+        }
+        if(datBanDTO.getPaymentMethod().equals(PaymentMethod.CASH)){
+           UserDatBan(datBanDTO);
+             return ResponseEntity.ok("Booking Successful");
+        }
+        return ResponseEntity.badRequest().body("Booking Failed");
+    }
+
+    @Override
+    public ResponseEntity<?> getDonDatBanByToken(String token) {
+        Optional<DonDatBan> dons = donDatBanRepository.getDonDatBanByTnfRef(token);
+        if(dons.isEmpty()){
+            return ResponseEntity.badRequest().body("ABC");
+        }
+        return ResponseEntity.ok(dons);
     }
 
 

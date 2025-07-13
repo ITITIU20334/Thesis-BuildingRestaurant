@@ -3,21 +3,24 @@ package nha_hang.demo.API;
 import lombok.RequiredArgsConstructor;
 import nha_hang.demo.DTO.ChonBanDTO;
 import nha_hang.demo.DTO.DatBanDTO;
+import nha_hang.demo.Enum.PaymentMethod;
 import nha_hang.demo.Model.DonDatBan;
+import nha_hang.demo.Model.MonAn;
 import nha_hang.demo.Repository.DonDatBanRepository;
 import nha_hang.demo.Service.DonDatBan.DonDatBanService;
 import nha_hang.demo.Service.Email.EmailImpl;
 import nha_hang.demo.Service.Email.EmailService;
+import nha_hang.demo.Service.MonAn.MonAnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 import nha_hang.demo.Enum.DatBanTrangThai;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @CrossOrigin("*")
 @RequiredArgsConstructor
@@ -31,9 +34,11 @@ public class DonDatBanController {
     @Autowired
     private EmailService emailService;
     private final Map<String, DatBanDTO> pendingBookings = new HashMap<>();
-
+    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     @Autowired
     private JavaMailSender mailSender;
+    @Autowired
+    private MonAnService monAnService;
 
     @GetMapping
     public ResponseEntity<List<DonDatBan>> getALLDons (){
@@ -85,6 +90,7 @@ public class DonDatBanController {
     @PostMapping("/khachhang/datban")
     public ResponseEntity<DonDatBan> khachDatBan(@RequestBody DatBanDTO datBanDTO){
         System.out.println(datBanDTO);
+
         return ResponseEntity.ok().body(donDatBanService.UserDatBan(datBanDTO));
 
 
@@ -113,25 +119,43 @@ public class DonDatBanController {
 
         pendingBookings.put(token, booking);
         System.out.println("pending: "+pendingBookings);
+<<<<<<< Updated upstream
         emailService.sendConfirmationEmail(booking.getEmail(), token);
+=======
+        emailService.sendConfirmationEmail(booking.getEmail(), token, booking);
+
+        scheduler.schedule(() -> {
+            pendingBookings.remove(token);
+            System.out.println("Token expired and removed: " + token);
+        }, 15, TimeUnit.MINUTES);
+>>>>>>> Stashed changes
         return ResponseEntity.ok("✅ Reservation confirmation email has been sent.");
     }
 
+
     @GetMapping("/confirm")
-    public ResponseEntity<String> confirmBooking(@RequestParam String token) {
+    public ResponseEntity<?> confirmBooking(@RequestParam String token) {
         System.out.println("pending :"+pendingBookings);
         DatBanDTO booking = pendingBookings.get(token);
-
+        System.out.println("booking :"+booking);
         if (booking == null) {
             return ResponseEntity.badRequest().body("❌Invalid or expired token.");
         }
+        //ResponseEntity<?> dons = donDatBanService.getDonDatBanByToken(token);
 
         booking.setTrangThai(DatBanTrangThai.DangXuLy.getTrangthai());
         donDatBanService.UserDatBan(booking);
+
 
         pendingBookings.remove(token); // Xóa tạm sau khi đã xác nhận
 
         return ResponseEntity.ok("Your reservation has been confirmed!");
 
+    }
+
+    @GetMapping("/getDonByToken")
+    public ResponseEntity<?> getDonByToken(@RequestParam String token){
+        System.out.println("pending :"+token);
+        return donDatBanService.getDonDatBanByToken(token);
     }
 }

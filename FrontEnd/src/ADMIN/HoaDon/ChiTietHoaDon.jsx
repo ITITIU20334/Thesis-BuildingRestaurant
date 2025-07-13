@@ -21,6 +21,9 @@ const ChiTietHoaDon = (props) => {
   const [thanhToanModal, setThanhToanModal] = useState(false);
   const [idHD, setIdHD] = useState("");
   const [dataThanhToan, setdataThanhToan] = useState([]);
+  const daThanhToan = chitiet.map((item) => {
+    return item.daThanhToan;
+  });
   const navigate = useNavigate();
   // Đóng Modal thêm món ăn
   const handleCloseForm = () => {
@@ -85,7 +88,9 @@ const ChiTietHoaDon = (props) => {
   // };
 
   const handleThanhToan = (idhd, tongCong) => {
-    setdataThanhToan({ idhd, idBan, tongCong });
+    const SoTien = tongCong - daThanhToan;
+    console.log("SoTien:", SoTien);
+    setdataThanhToan({ idhd, idBan, SoTien });
     console.log(dataThanhToan);
     setThanhToanModal(true);
   };
@@ -176,8 +181,16 @@ const ChiTietHoaDon = (props) => {
                       </tr>
                     ))}
                     <tr>
-                      <td colSpan={"2"}>Total Amount:</td>
+                      <td colSpan={"2"}>Total:</td>
                       <td colSpan={"4"}>{tongCong}</td>
+                    </tr>
+                    <tr>
+                      <td colSpan={"2"}>Paid:</td>
+                      <td colSpan={"4"}>{daThanhToan}</td>
+                    </tr>
+                    <tr>
+                      <td colSpan={"2"}>Total Amount:</td>
+                      <td colSpan={"4"}>{tongCong - daThanhToan}</td>
                     </tr>
                   </tbody>
                 </Table>

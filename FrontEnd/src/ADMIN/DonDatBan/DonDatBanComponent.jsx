@@ -87,6 +87,7 @@ export const DonDatBanComponent = () => {
             <th>Phone Number</th>
             <th>Status</th>
             <th>Note</th>
+            <th>Pay Status</th>
             <th>Table</th>
             <th>Action</th>
           </tr>
@@ -97,8 +98,11 @@ export const DonDatBanComponent = () => {
               <td>{index + 1}</td> <td>{x.ngayDat}</td>
               <td>{x.thoiGian.substring(0, 5)}</td> <td>{x.hoTen}</td>
               <td>{x.soDT}</td> <td>{x.trangThai}</td> <td>{x.ghiChu}</td>
+              <td>{x.paidStatus}</td>
               <td>
-                {x.idBan && x.idBan.tenBan ? x.idBan.tenBan : "No table available"}
+                {x.idBan && x.idBan.tenBan
+                  ? x.idBan.tenBan
+                  : "No table available"}
               </td>
               <td>
                 <Dropdown>

@@ -17,7 +17,7 @@ const Footer = () => {
             </p>
             <p>19, Road 449, Le Van Viet, District 9, Ho Chi Minh City</p>
             <p>📞 0123 456 789</p>
-            <p>⏰ Working Time: 8 A.M - 23 P.M </p>
+            <p>⏰ Working Time: 10 A.M - 20 P.M </p>
 
             <p>
             Branch registration certificate number: 0311542661-002 

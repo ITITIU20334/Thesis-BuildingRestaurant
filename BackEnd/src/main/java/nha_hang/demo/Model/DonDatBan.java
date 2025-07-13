@@ -2,10 +2,13 @@ package nha_hang.demo.Model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import nha_hang.demo.Enum.PaymentStatus;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -45,6 +48,15 @@ public class DonDatBan {
 
     @Column (name = "email")
     private String email;
+
+    @Column(name = "tong_tien")
+    private BigDecimal tongTien;
+
+    @Column(name = "tnf_ref")
+    private String tnfRef;
+
+    @Column(name = "paid_status")
+    private String paidStatus;
 
 
 }
