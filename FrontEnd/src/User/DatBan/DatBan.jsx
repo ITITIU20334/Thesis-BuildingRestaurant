@@ -121,15 +121,9 @@ const DatBan = () => {
       console.log("Form data:", formData);
       let res = await UserDatBan(formData);
       if (res) {
-<<<<<<< Updated upstream
-        toast.success("Booking successful");
-        window.alert("Booking successful");
-        navigate("/");
-=======
         toast.success("Booking successful! Check your Email");
         window.alert("Booking successful! Please check your email!");
         //navigate("/");
->>>>>>> Stashed changes
       } else {
         window.alert("Booking failed");
       }

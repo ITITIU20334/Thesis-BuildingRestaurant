@@ -2,27 +2,27 @@ package nha_hang.demo.Service.Email;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import nha_hang.demo.DTO.ChiTietDonDatBanDTO;
+import nha_hang.demo.DTO.DatBanDTO;
+import nha_hang.demo.Model.MonAn;
+import nha_hang.demo.Service.MonAn.MonAnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+
+import java.text.NumberFormat;
+import java.util.Locale;
+import java.util.Optional;
 
 @Service
 public class EmailImpl implements EmailService {
 
     @Autowired
     private JavaMailSender mailSender;
-
+    @Autowired
+    private MonAnService monAnService;
     @Override
-<<<<<<< Updated upstream
-    public void sendConfirmationEmail(String to, String token) {
-        String url = "http://localhost:3000/confirm?token=" + token;
-
-        String body = "<h3>Please Confirm Your Reservation:</h3>"
-                + "<a href=\"" + url + "\" "
-                + "style=\"display:inline-block;padding:10px 20px;background-color:#28a745;color:white;"
-                + "text-decoration:none;border-radius:5px;\">Confirm</a>";
-=======
     public void sendConfirmationEmail(String to, String token, DatBanDTO dto) {
         String urlComfirm = "http://localhost:3000/confirm?token=" + token;
         String urlPayment = "http://localhost:3000/confirm?token=" + token +"&method=Pay";
@@ -82,7 +82,6 @@ public class EmailImpl implements EmailService {
                         +"<a href=\"" + urlPayment + "\" "
                         + "style=\"display:inline-block;margin-top:20px;margin-left:20px;padding:10px 20px;background-color:#28a745;color:white;"
                         + "text-decoration:none;border-radius:5px;font-weight:bold;\">Pay</a>";
->>>>>>> Stashed changes
 
         try {
             MimeMessage message = mailSender.createMimeMessage();

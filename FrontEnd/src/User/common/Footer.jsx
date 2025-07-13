@@ -35,17 +35,16 @@ const Footer = () => {
             </ul>
           </Col>
           <Col md={4}>
-            <h5>EMAIL KHUYẾN MÃI</h5>
+            <h5>Feedback Email</h5>
             <p>
-              Đăng ký email với chúng tôi để nhận được những tin khuyến mãi mới
-              nhất từ chúng tôi
+            Send us your comments and reviews to improve the quality of the restaurant
             </p>
             <Form>
               <Form.Group controlId="formBasicEmail">
-                <Form.Control type="email" placeholder="Nhập email của bạn" />
+                <Form.Control type="email" placeholder="Enter Email" />
               </Form.Group>
               <Button variant="primary" type="submit">
-                Gửi
+                Send
               </Button>
             </Form>
           </Col>

@@ -133,7 +133,7 @@ public class HoaDonImpl implements HoaDonService {
 
             // Thông tin hóa đơn
             document.add(new Paragraph("Bill code: " + hoaDon.getIdHD()).setFont(font).setMarginBottom(5));
-            document.add(new Paragraph("Customer: " + (hoaDon.getIdKH() != null ? hoaDon.getIdKH().getHoTen() : "Khách lẻ")).setFont(font).setMarginBottom(5));
+            document.add(new Paragraph("Customer: " + (hoaDon.getIdKH() != null ? hoaDon.getIdKH().getHoTen() : "Guest")).setFont(font).setMarginBottom(5));
             document.add(new Paragraph("Date:" + hoaDon.getNgayTao()).setFont(font).setMarginBottom(5));
             document.add(new Paragraph("Staff:" + hoaDon.getTenNhanVien()).setFont(font).setMarginBottom(5));
             document.add(new Paragraph("Table:" + hoaDon.getIdBan().getTenBan()).setFont(font).setMarginBottom(20));
@@ -228,7 +228,7 @@ public class HoaDonImpl implements HoaDonService {
             document.setFont(font);
 
             // Tiêu đề báo cáo
-            Paragraph title = new Paragraph("BÁO CÁO HÓA ĐƠN NGÀY " + ngayTao.toString())
+            Paragraph title = new Paragraph("DAILY BILL " + ngayTao.toString())
                     .setFont(font)
                     .setFontSize(24)
                     .setBold()
@@ -242,11 +242,11 @@ public class HoaDonImpl implements HoaDonService {
             table.setWidth(UnitValue.createPercentValue(100));
 
             // Header cho bảng
-            table.addHeaderCell(new Cell().add(new Paragraph("STT").setFont(font).setBold().setBackgroundColor(ColorConstants.LIGHT_GRAY)));
-            table.addHeaderCell(new Cell().add(new Paragraph("Mã Hóa Đơn").setFont(font).setBold().setBackgroundColor(ColorConstants.LIGHT_GRAY)));
-            table.addHeaderCell(new Cell().add(new Paragraph("Khách Hàng").setFont(font).setBold().setBackgroundColor(ColorConstants.LIGHT_GRAY)));
-            table.addHeaderCell(new Cell().add(new Paragraph("Tổng Tiền").setFont(font).setBold().setBackgroundColor(ColorConstants.LIGHT_GRAY)));
-            table.addHeaderCell(new Cell().add(new Paragraph("Số bàn").setFont(font).setBold().setBackgroundColor(ColorConstants.LIGHT_GRAY)));
+            table.addHeaderCell(new Cell().add(new Paragraph("No").setFont(font).setBold().setBackgroundColor(ColorConstants.LIGHT_GRAY)));
+            table.addHeaderCell(new Cell().add(new Paragraph("ID").setFont(font).setBold().setBackgroundColor(ColorConstants.LIGHT_GRAY)));
+            table.addHeaderCell(new Cell().add(new Paragraph("Customer").setFont(font).setBold().setBackgroundColor(ColorConstants.LIGHT_GRAY)));
+            table.addHeaderCell(new Cell().add(new Paragraph("Total Amount").setFont(font).setBold().setBackgroundColor(ColorConstants.LIGHT_GRAY)));
+            table.addHeaderCell(new Cell().add(new Paragraph("Table No").setFont(font).setBold().setBackgroundColor(ColorConstants.LIGHT_GRAY)));
 
             // Thêm từng hóa đơn vào bảng
             int stt = 1;
@@ -254,7 +254,7 @@ public class HoaDonImpl implements HoaDonService {
                 String formattedAmount = currencyFormat.format(hoaDon.getTongTien());
                 table.addCell(new Cell().add(new Paragraph(String.valueOf(stt++)).setFont(font).setTextAlignment(TextAlignment.CENTER)));
                 table.addCell(new Cell().add(new Paragraph(String.valueOf(hoaDon.getIdHD())).setFont(font)));
-                table.addCell(new Cell().add(new Paragraph(hoaDon.getIdKH() != null ? hoaDon.getIdKH().getHoTen() : "Khách lẻ").setFont(font)));
+                table.addCell(new Cell().add(new Paragraph(hoaDon.getIdKH() != null ? hoaDon.getIdKH().getHoTen() : "Guest").setFont(font)));
                 table.addCell(new Cell().add(new Paragraph(formattedAmount).setFont(font).setTextAlignment(TextAlignment.RIGHT)));
                 table.addCell(new Cell().add(new Paragraph(hoaDon.getIdBan().getTenBan()).setFont(font).setTextAlignment(TextAlignment.CENTER)));
             }
@@ -262,13 +262,13 @@ public class HoaDonImpl implements HoaDonService {
             document.add(table);
 
             document.add(new Paragraph("\n"));
-            document.add(new Paragraph("Tổng số hóa đơn trong ngày: " + totalInvoices).setFont(font).setBold());
-            document.add(new Paragraph("Tổng doanh thu trong ngày: " + tongCong ).setFont(font).setBold());
+            document.add(new Paragraph("Total bill for the day: " + totalInvoices).setFont(font).setBold());
+            document.add(new Paragraph("Total revenue for the day: " + tongCong ).setFont(font).setBold());
             document.close();
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "bao_cao_" + ngayTao.toString() + ".pdf");
+            headers.setContentDispositionFormData("attachment", "report_" + ngayTao.toString() + ".pdf");
 
             return ResponseEntity.ok()
                     .headers(headers)

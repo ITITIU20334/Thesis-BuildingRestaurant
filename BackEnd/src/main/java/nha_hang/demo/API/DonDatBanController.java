@@ -119,16 +119,12 @@ public class DonDatBanController {
 
         pendingBookings.put(token, booking);
         System.out.println("pending: "+pendingBookings);
-<<<<<<< Updated upstream
-        emailService.sendConfirmationEmail(booking.getEmail(), token);
-=======
         emailService.sendConfirmationEmail(booking.getEmail(), token, booking);
 
         scheduler.schedule(() -> {
             pendingBookings.remove(token);
             System.out.println("Token expired and removed: " + token);
         }, 15, TimeUnit.MINUTES);
->>>>>>> Stashed changes
         return ResponseEntity.ok("✅ Reservation confirmation email has been sent.");
     }
 
